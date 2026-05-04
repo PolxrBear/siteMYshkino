@@ -402,7 +402,7 @@ function renderMainPage() {
                             }
                         </div>
                         <div class="card-content">
-                            <h3>${member.name}</h3>
+                            <div class="name-badge">${member.name}</div>
                         </div>
                     </div>
                 `).join('')}
