@@ -6,7 +6,6 @@ const teamData = {
         {
             id: "pavel",
             name: "Елисеев Павел",
-            role: "программист",
             photoUrl: "avatarsSite/pavel.jpg",
             photoInitials: "ПЕ",
             contacts: "<img src='icons/telegram.jpg' style='width:16px;height:16px;vertical-align:middle;'> @polxrknight | 📱 +7 (922) 132-51-75 | 📧 eliseev.p25175@gmail.com",
@@ -48,6 +47,8 @@ const teamData = {
                         { name: "Joey Valence & Brae - HOOLIGANG", url: "music/pavel/HOOLIGANG.mp3", cover: "covers/pavel/HOOLIGANG.jpg" },
                         { name: "Scorpions - Rock You Like a Hurricane", url: "music/pavel/hurricane.mp3", cover: "covers/pavel/hurricane.jpg" },
                         { name: "Serge Devant, Hadley - Addicted", url: "music/pavel/Addicted.mp3", cover: "covers/pavel/Addicted.jpg" },
+                        { name: "2hollis - two bad", url: "music/pavel/two_bad.mp3", cover: "covers/pavel/two_bad.jpg" },
+                        { name: "Kendrick Lamar, LEFTY GUNPLAY - tv off", url: "music/pavel/tv_off.mp3", cover: "covers/pavel/tv_off.jpg" },
                     ]
                 }
             }
@@ -55,7 +56,6 @@ const teamData = {
         {
             id: "kirill",
             name: "Комлев Кирилл",
-            role: "программист",
             photoUrl: "avatarsSite/kirill.jpg",
             photoInitials: "КК",
             contacts: "",
@@ -91,7 +91,6 @@ const teamData = {
         {
             id: "ilya",
             name: "Байтуллин Илья",
-            role: "докладчик",
             photoUrl: "avatarsSite/ilya.jpg",
             photoInitials: "ИБ",
             contacts: "",
@@ -127,7 +126,6 @@ const teamData = {
         {
             id: "polina",
             name: "Ковкова Полина",
-            role: "менеджер по отчётности",
             photoUrl: "avatarsSite/polina.jpg",
             photoInitials: "ПК",
             contacts: "",
@@ -163,7 +161,6 @@ const teamData = {
         {
             id: "kseniya",
             name: "Грибовская Ксения",
-            role: "контент-менеджер",
             photoUrl: "avatarsSite/kseniya.jpg",
             photoInitials: "КГ",
             contacts: "",
@@ -405,7 +402,6 @@ function renderMainPage() {
                             }
                         </div>
                         <div class="card-content">
-                            <span class="role-badge">${member.role}</span>
                             <h3>${member.name}</h3>
                         </div>
                     </div>
@@ -447,7 +443,6 @@ function renderStudentPage() {
                 </div>
                 <div class="student-info">
                     <h2>${student.name}</h2>
-                    <div class="student-role">${student.role}</div>
                     <div class="contacts">${student.contacts}</div>
                 </div>
             </div>
