@@ -16,7 +16,7 @@ body {
 .container {
     max-width: 1300px;
     margin: 0 auto;
-    padding: 2rem 1.5rem;
+    padding: 1rem;
 }
 
 /* хедер и навигация */
@@ -24,9 +24,9 @@ body {
     background: #ffffffdd;
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    border-radius: 2rem;
-    margin-bottom: 2rem;
-    padding: 1rem 2rem;
+    border-radius: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.5rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -35,7 +35,7 @@ body {
 }
 
 .logo h1 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 800;
     background: linear-gradient(135deg, #2b5f8a, #1e3c4c);
     background-clip: text;
@@ -45,14 +45,14 @@ body {
 }
 
 .logo p {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: #4a627a;
     font-weight: 500;
 }
 
 .nav-links {
     display: flex;
-    gap: 1.5rem;
+    gap: 0.8rem;
     flex-wrap: wrap;
 }
 
@@ -61,9 +61,10 @@ body {
     font-weight: 600;
     color: #1e4a6e;
     background: #eef3fc;
-    padding: 0.5rem 1rem;
+    padding: 0.4rem 0.8rem;
     border-radius: 2rem;
     transition: all 0.2s ease;
+    font-size: 0.9rem;
 }
 
 .nav-links a:hover {
@@ -76,13 +77,13 @@ body {
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-    margin: 2.5rem 0;
+    gap: 1.5rem;
+    margin: 2rem 0;
 }
 
 .card {
     background: white;
-    border-radius: 2rem;
+    border-radius: 1.5rem;
     overflow: hidden;
     box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
     transition: all 0.25s ease;
@@ -91,7 +92,7 @@ body {
 }
 
 .card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-5px);
     box-shadow: 0 30px 40px -15px rgba(0,0,0,0.2);
 }
 
@@ -101,7 +102,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: bold;
     color: white;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
@@ -120,34 +121,35 @@ body {
 }
 
 .card-content {
-    padding: 1.5rem;
+    padding: 1rem;
 }
 
 .card-content h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.3rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
 }
 
 .role-badge {
     display: inline-block;
     background: #eef2fa;
     color: #2c6282;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    padding: 0.25rem 0.8rem;
+    padding: 0.2rem 0.6rem;
     border-radius: 20px;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.5rem;
 }
 
 .card-content p {
     color: #4b5e72;
     margin-top: 0.5rem;
+    font-size: 0.85rem;
 }
 
 .student-page {
     background: white;
-    border-radius: 2rem;
-    padding: 2rem;
+    border-radius: 1.5rem;
+    padding: 1.2rem;
     box-shadow: 0 15px 35px rgba(0,0,0,0.05);
     margin: 1rem 0;
 }
@@ -158,12 +160,12 @@ body {
     gap: 0.5rem;
     background: none;
     border: none;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: #2b5f8a;
     cursor: pointer;
-    margin-bottom: 1.5rem;
-    padding: 0.4rem 1rem;
+    margin-bottom: 1rem;
+    padding: 0.4rem 0.8rem;
     border-radius: 2rem;
     transition: 0.2s;
 }
@@ -175,22 +177,22 @@ body {
 .student-header {
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
     align-items: center;
     border-bottom: 2px solid #eef2f7;
-    padding-bottom: 1.5rem;
+    padding-bottom: 1rem;
 }
 
 .student-avatar {
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
     background: #b7cfdf;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: bold;
     color: #2b4f6e;
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
@@ -204,184 +206,136 @@ body {
 }
 
 .student-info h2 {
-    font-size: 2.2rem;
+    font-size: 1.5rem;
     margin-bottom: 0.2rem;
 }
 
 .student-role {
-    font-size: 1.1rem;
+    font-size: 0.85rem;
     background: #dce6f0;
-    padding: 0.2rem 1rem;
+    padding: 0.2rem 0.8rem;
     border-radius: 30px;
     display: inline-block;
 }
 
 .contacts {
-    margin-top: 0.8rem;
-    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
     color: #2c6282;
+    word-break: break-all;
 }
 
-.category-menu {
+.contacts img {
+    vertical-align: middle;
+}
+
+/* Большие круглые кнопки категорий */
+.categories-circle-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.8rem;
-    margin: 2rem 0 1.5rem;
-    border-bottom: 1px solid #e2e8f0;
-    padding-bottom: 0.8rem;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    padding: 0.5rem;
 }
 
-.cat-btn {
-    background: #f0f4f9;
-    border: none;
-    padding: 0.6rem 1.4rem;
-    border-radius: 40px;
-    font-weight: 600;
-    color: #2c3e50;
+.category-circle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
     cursor: pointer;
-    transition: all 0.2s;
-    font-size: 0.9rem;
+    transition: transform 0.2s;
+    width: 85px;
 }
 
-.cat-btn.active {
-    background: #2b5f8a;
-    color: white;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+.category-circle:hover {
+    transform: translateY(-3px);
 }
 
-.cat-btn:hover:not(.active) {
-    background: #dfe6ef;
-    transform: scale(0.95);
+.category-circle-ring {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 3px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s;
 }
 
-.category-content {
-    background: #fafcff;
-    padding: 1.5rem;
-    border-radius: 1.5rem;
-    min-height: 240px;
-    margin-top: 0.5rem;
-    transition: all 0.2s;
-    border: 1px solid #eef2f8;
+.category-circle:hover .category-circle-ring {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
-.category-content h3 {
-    margin-bottom: 1rem;
-    color: #1f4e6e;
-    border-left: 5px solid #2b5f8a;
-    padding-left: 1rem;
+.category-circle-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
 }
 
-.category-content p {
-    margin-bottom: 0.8rem;
-    line-height: 1.5;
-}
-
-.footer {
-    margin-top: 3rem;
+.category-circle-title {
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: #2c3e50;
     text-align: center;
-    font-size: 0.8rem;
-    color: #5e768b;
-    padding: 1rem;
-    border-top: 1px solid #dce5ec;
 }
 
-@media (max-width: 700px) {
-    .site-header {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
-    .student-header {
-        flex-direction: column;
-        text-align: center;
-    }
+.category-empty {
+    font-size: 0.6rem;
+    color: #999;
 }
 
 /* Музыкальная секция */
-.music-section {
-    margin-top: 0.5rem;
-}
-
-.music-section h4 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    color: #805ad5;
-}
-
-.tracks-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.track-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.music-section-full {
+    margin-top: 1.5rem;
     padding: 1rem;
     background: #f8fafd;
     border-radius: 1rem;
-    border-left: 4px solid #805ad5;
-    flex-wrap: wrap;
+    border: 1px solid #e2e8f0;
 }
 
-.track-number {
-    font-weight: bold;
+.music-section-full h3 {
+    margin-bottom: 0.8rem;
     color: #805ad5;
-    min-width: 40px;
     font-size: 1.1rem;
 }
 
-.track-info {
-    flex: 1;
-    min-width: 200px;
+.tracks-list-modern {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
-.track-name {
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    color: #1a2c3e;
-}
-
-audio {
-    width: 100%;
-    height: 40px;
-    border-radius: 8px;
-}
-
-@media (max-width: 600px) {
-    .track-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-}
-
-/* Современный музыкальный плеер с обложками */
+/* Современный музыкальный плеер с обложками (мобильная версия) */
 .track-card-modern {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
     background: #f8fafd;
-    border-radius: 16px;
-    padding: 12px 20px;
-    margin-bottom: 12px;
+    border-radius: 12px;
+    padding: 10px;
     transition: all 0.3s ease;
     border: 1px solid #e2e8f0;
 }
 
 .track-card-modern:hover {
     background: #ffffff;
-    box-shadow: 0 4px 15px rgba(128, 90, 213, 0.15);
-    transform: translateX(5px);
+    box-shadow: 0 2px 10px rgba(128, 90, 213, 0.1);
 }
 
-/* Круглая обложка с фиолетовой обводкой */
+/* Круглая обложка */
 .track-cover-wrapper {
     position: relative;
     flex-shrink: 0;
     cursor: pointer;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
 }
 
 .track-cover {
@@ -389,20 +343,19 @@ audio {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #805ad5;
-    box-shadow: 0 2px 8px rgba(128, 90, 213, 0.3);
+    border: 2px solid #805ad5;
+    box-shadow: 0 2px 6px rgba(128, 90, 213, 0.3);
     transition: all 0.3s ease;
     cursor: pointer;
     display: block;
 }
 
 .track-card-modern:hover .track-cover {
-    transform: scale(1.05);
+    transform: scale(1.03);
     border-color: #6b46c1;
-    box-shadow: 0 4px 12px rgba(128, 90, 213, 0.5);
 }
 
-/* Оверлей при наведении на обложку */
+/* Оверлей при наведении */
 .track-play-overlay {
     position: absolute;
     top: 0;
@@ -415,11 +368,10 @@ audio {
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 20px;
+    font-size: 16px;
     opacity: 0;
     transition: opacity 0.3s ease;
     cursor: pointer;
-    box-sizing: border-box;
 }
 
 .track-cover-wrapper:hover .track-play-overlay {
@@ -431,154 +383,34 @@ audio {
 }
 
 .overlay-icon {
-    font-size: 18px;
+    font-size: 14px;
     margin-left: 2px;
 }
 
 /* Информация о треке */
 .track-info-modern {
     flex: 1;
+    min-width: 0;
 }
 
 .track-name-modern {
     font-weight: 600;
     color: #1a2c3e;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
+    margin-bottom: 6px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* Аудио плеер */
+/* Аудио плеер - мобильная оптимизация */
 .track-info-modern audio {
     width: 100%;
-    height: 38px;
+    height: 36px;
     border-radius: 20px;
 }
 
-/* Адаптивность */
-@media (max-width: 600px) {
-    .track-card-modern {
-        flex-direction: column;
-        text-align: center;
-        padding: 16px;
-    }
-    
-    .track-cover {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .track-info-modern {
-        width: 100%;
-    }
-}
-
-/* Анимация пульсации при клике */
-.track-cover:active {
-    animation: coverPulse 0.25s ease-in-out;
-}
-
-@keyframes coverPulse {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(128, 90, 213, 0.7);
-    }
-    50% {
-        transform: scale(0.90);
-        box-shadow: 0 0 0 8px rgba(128, 90, 213, 0.3);
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(128, 90, 213, 0);
-    }
-}
-
-/* Дополнительная пульсация для всей карточки при клике на обложку */
-.track-cover-wrapper:active {
-    animation: wrapperPulse 0.25s ease;
-}
-
-@keyframes wrapperPulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(0.90);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-
-
-/* ------- Истории ------- */
-
-
-
-/* =============================== */
-
-/* Большие круглые кнопки категорий */
-.categories-circle-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-    margin: 2rem 0;
-    padding: 1rem;
-}
-
-.category-circle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
-    cursor: pointer;
-    transition: transform 0.2s;
-    width: 120px;
-}
-
-.category-circle:hover {
-    transform: translateY(-5px);
-}
-
-.category-circle-ring {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 4px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    transition: all 0.3s;
-}
-
-.category-circle:hover .category-circle-ring {
-    transform: scale(1.05);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-}
-
-.category-circle-inner {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-}
-
-.category-circle-title {
-    font-weight: 600;
-    font-size: 1rem;
-    color: #2c3e50;
-}
-
-.category-empty {
-    font-size: 0.7rem;
-    color: #999;
-}
-
-/* Модальное окно для медиа (на весь экран) */
+/* Модальное окно для медиа */
 .media-modal {
     position: fixed;
     top: 0;
@@ -605,15 +437,15 @@ audio {
     left: 10px;
     right: 10px;
     display: flex;
-    gap: 5px;
+    gap: 4px;
     z-index: 10;
 }
 
 .media-progress-bar {
     flex: 1;
-    height: 3px;
+    height: 2px;
     background: rgba(255,255,255,0.3);
-    border-radius: 3px;
+    border-radius: 2px;
     overflow: hidden;
 }
 
@@ -652,18 +484,19 @@ audio {
 .media-left, .media-right {
     flex: 1;
     cursor: pointer;
+    min-width: 60px;
 }
 
 .media-close {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 15px;
+    right: 15px;
     background: rgba(0,0,0,0.6);
     border: none;
     color: white;
-    font-size: 24px;
-    width: 40px;
-    height: 40px;
+    font-size: 20px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -677,47 +510,293 @@ audio {
     background: rgba(0,0,0,0.8);
 }
 
-/* Музыкальная секция внизу */
-.music-section-full {
+.footer {
     margin-top: 2rem;
-    padding: 1.5rem;
-    background: #f8fafd;
-    border-radius: 1.5rem;
-    border: 1px solid #e2e8f0;
+    text-align: center;
+    font-size: 0.7rem;
+    color: #5e768b;
+    padding: 0.8rem;
+    border-top: 1px solid #dce5ec;
 }
 
-.music-section-full h3 {
-    margin-bottom: 1rem;
-    color: #805ad5;
-    font-size: 1.3rem;
-}
+/* ============================================ */
+/* МОБИЛЬНАЯ АДАПТАЦИЯ (до 768px) */
+/* ============================================ */
 
-.tracks-list-modern {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-}
-
-/* Адаптив для кружков */
-@media (max-width: 600px) {
-    .categories-circle-grid {
+@media (max-width: 768px) {
+    .container {
+        padding: 0.8rem;
+    }
+    
+    .site-header {
+        padding: 0.8rem 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .logo h1 {
+        font-size: 1.2rem;
+    }
+    
+    .logo p {
+        font-size: 0.6rem;
+    }
+    
+    .team-grid {
+        grid-template-columns: 1fr;
         gap: 1rem;
+        margin: 1.5rem 0;
+    }
+    
+    .card-img {
+        height: 150px;
+    }
+    
+    .card-content h3 {
+        font-size: 1.1rem;
+    }
+    
+    /* Круглые кнопки категорий на мобилках */
+    .categories-circle-grid {
+        gap: 0.8rem;
     }
     
     .category-circle {
-        width: 90px;
+        width: 75px;
     }
     
     .category-circle-ring {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .category-circle-inner {
+        font-size: 1.6rem;
+    }
+    
+    .category-circle-title {
+        font-size: 0.65rem;
+    }
+    
+    /* Музыка на мобилках - вертикальное расположение */
+    .track-card-modern {
+        flex-direction: column;
+        text-align: center;
+        padding: 12px;
+        gap: 10px;
+    }
+    
+    .track-cover-wrapper {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .track-cover {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .track-name-modern {
+        white-space: normal;
+        word-break: break-word;
+        font-size: 0.85rem;
+        text-align: center;
+    }
+    
+    .track-info-modern {
+        width: 100%;
+    }
+    
+    .track-info-modern audio {
+        height: 42px;
+    }
+    
+    /* Студент на мобилках */
+    .student-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.8rem;
+    }
+    
+    .student-avatar {
         width: 70px;
         height: 70px;
     }
     
+    .student-info h2 {
+        font-size: 1.3rem;
+    }
+    
+    .student-role {
+        font-size: 0.75rem;
+    }
+    
+    .contacts {
+        font-size: 0.7rem;
+        word-break: break-word;
+    }
+    
+    .music-section-full {
+        padding: 0.8rem;
+    }
+    
+    .music-section-full h3 {
+        font-size: 1rem;
+    }
+    
+    /* Области для листания историй */
+    .media-left, .media-right {
+        min-width: 40px;
+    }
+    
+    .media-close {
+        top: 10px;
+        right: 10px;
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+}
+
+/* ============================================ */
+/* ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 480px) */
+/* ============================================ */
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0.5rem;
+    }
+    
+    .categories-circle-grid {
+        gap: 0.6rem;
+    }
+    
+    .category-circle {
+        width: 65px;
+    }
+    
+    .category-circle-ring {
+        width: 55px;
+        height: 55px;
+    }
+    
     .category-circle-inner {
-        font-size: 2rem;
+        font-size: 1.4rem;
     }
     
     .category-circle-title {
-        font-size: 0.8rem;
+        font-size: 0.6rem;
     }
+    
+    .track-cover-wrapper {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .track-cover {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .track-name-modern {
+        font-size: 0.75rem;
+    }
+    
+    .student-page {
+        padding: 0.8rem;
+    }
+    
+    .back-btn {
+        font-size: 0.8rem;
+        margin-bottom: 0.8rem;
+    }
+}
+
+/* ============================================ */
+/* ПЛАНШЕТЫ (768px - 1024px) */
+/* ============================================ */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .team-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1.2rem;
+    }
+    
+    .category-circle {
+        width: 100px;
+    }
+    
+    .category-circle-ring {
+        width: 85px;
+        height: 85px;
+    }
+    
+    .category-circle-inner {
+        font-size: 2.5rem;
+    }
+    
+    .track-card-modern {
+        gap: 15px;
+    }
+    
+    .track-cover-wrapper {
+        width: 55px;
+        height: 55px;
+    }
+}
+
+/* ============================================ */
+/* АЛЬБОМНАЯ ОРИЕНТАЦИЯ НА МОБИЛКАХ */
+/* ============================================ */
+
+@media (max-width: 768px) and (orientation: landscape) {
+    .category-circle {
+        width: 70px;
+    }
+    
+    .category-circle-ring {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .category-circle-inner {
+        font-size: 1.5rem;
+    }
+    
+    .track-card-modern {
+        flex-direction: row;
+        text-align: left;
+    }
+    
+    .track-cover-wrapper {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .track-name-modern {
+        white-space: nowrap;
+        text-align: left;
+    }
+}
+
+/* ============================================ */
+/* АНИМАЦИИ */
+/* ============================================ */
+
+@keyframes coverPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(128, 90, 213, 0.7);
+    }
+    50% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 6px rgba(128, 90, 213, 0.3);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(128, 90, 213, 0);
+    }
+}
+
+.track-cover:active {
+    animation: coverPulse 0.25s ease-in-out;
 }
