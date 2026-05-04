@@ -153,9 +153,7 @@ let currentStudentId = null;
 let currentMediaModal = null;
 let currentMediaList = [];
 let currentMediaIndex = 0;
-let currentCategoryKey = null;
-let musicWasPlayingBeforeVideo = false;  // Флаг: играла ли музыка перед видео
-let audioThatWasPlaying = null;           // Аудио, которое играло
+let audioElement = null;  // Текущий аудио-элемент который играет
 
 const app = document.getElementById("app");
 
@@ -163,12 +161,13 @@ function getStudentById(id) {
     return teamData.members.find(m => m.id === id);
 }
 
-// Функция для остановки всей музыки
-function pauseAllMusic() {
-    document.querySelectorAll('audio').forEach(audio => {
+// Останавливаем всю музыку
+function stopAllMusic() {
+    const allAudios = document.querySelectorAll('audio');
+    allAudios.forEach(audio => {
         if (!audio.paused) {
             audio.pause();
-            // Обновляем иконку
+            // Меняем иконку
             const card = audio.closest('.track-card-modern');
             if (card) {
                 const icon = card.querySelector('.overlay-icon');
@@ -178,45 +177,43 @@ function pauseAllMusic() {
     });
 }
 
-// Функция для возобновления музыки, которая играла
-function resumeMusic() {
-    if (audioThatWasPlaying && audioThatWasPlaying.paused && musicWasPlayingBeforeVideo) {
-        audioThatWasPlaying.play().catch(e => console.log('Не удалось возобновить музыку:', e));
-        const card = audioThatWasPlaying.closest('.track-card-modern');
+// Запоминаем какая музыка играла и ставим на паузу
+function pauseCurrentMusic() {
+    const allAudios = document.querySelectorAll('audio');
+    for (let audio of allAudios) {
+        if (!audio.paused) {
+            audioElement = audio; // Запоминаем
+            audio.pause();
+            const card = audio.closest('.track-card-modern');
+            if (card) {
+                const icon = card.querySelector('.overlay-icon');
+                if (icon) icon.textContent = '▶';
+            }
+            return true; // Нашли и поставили на паузу
+        }
+    }
+    audioElement = null;
+    return false;
+}
+
+// Возобновляем запомненную музыку
+function resumeCurrentMusic() {
+    if (audioElement && audioElement.paused) {
+        audioElement.play().catch(e => console.log('Ошибка возобновления:', e));
+        const card = audioElement.closest('.track-card-modern');
         if (card) {
             const icon = card.querySelector('.overlay-icon');
             if (icon) icon.textContent = '⏸';
         }
     }
-    musicWasPlayingBeforeVideo = false;
 }
 
-// Открытие медиа-просмотрщика
+// Открытие просмотрщика
 function openMediaModal(mediaList, startIndex = 0) {
     if (!mediaList || mediaList.length === 0) return;
     
-    // Запоминаем состояние музыки
-    musicWasPlayingBeforeVideo = false;
-    audioThatWasPlaying = null;
-    
-    // Проверяем, играет ли какая-то музыка
-    document.querySelectorAll('audio').forEach(audio => {
-        if (!audio.paused) {
-            musicWasPlayingBeforeVideo = true;
-            audioThatWasPlaying = audio;
-        }
-    });
-    
-    // Если первый элемент - видео, сразу ставим музыку на паузу
-    const firstMedia = mediaList[startIndex];
-    if (firstMedia.type === 'video' && audioThatWasPlaying && !audioThatWasPlaying.paused) {
-        audioThatWasPlaying.pause();
-        const card = audioThatWasPlaying.closest('.track-card-modern');
-        if (card) {
-            const icon = card.querySelector('.overlay-icon');
-            if (icon) icon.textContent = '▶';
-        }
-    }
+    // Запоминаем и ставим на паузу музыку, если она играет
+    pauseCurrentMusic();
     
     currentMediaList = mediaList;
     currentMediaIndex = startIndex;
@@ -242,7 +239,10 @@ function openMediaModal(mediaList, startIndex = 0) {
     document.body.appendChild(modal);
     currentMediaModal = modal;
     
-    modal.querySelector('.media-close').addEventListener('click', closeMediaModal);
+    modal.querySelector('.media-close').addEventListener('click', () => {
+        closeMediaModal();
+        resumeCurrentMusic(); // Возобновляем музыку при закрытии
+    });
     modal.querySelector('#mediaPrev').addEventListener('click', () => navigateMedia(-1));
     modal.querySelector('#mediaNext').addEventListener('click', () => navigateMedia(1));
     
@@ -279,10 +279,10 @@ function showMediaContent(index) {
     contentDiv.innerHTML = '';
     
     if (media.type === 'video') {
-        // Для видео - убеждаемся, что музыка на паузе
-        if (audioThatWasPlaying && !audioThatWasPlaying.paused) {
-            audioThatWasPlaying.pause();
-            const card = audioThatWasPlaying.closest('.track-card-modern');
+        // Видео - убеждаемся что музыка на паузе
+        if (audioElement && !audioElement.paused) {
+            audioElement.pause();
+            const card = audioElement.closest('.track-card-modern');
             if (card) {
                 const icon = card.querySelector('.overlay-icon');
                 if (icon) icon.textContent = '▶';
@@ -292,7 +292,6 @@ function showMediaContent(index) {
         const video = document.createElement('video');
         video.src = media.url;
         video.autoplay = true;
-        video.muted = false;
         video.playsInline = true;
         video.style.width = '100%';
         video.style.height = '100%';
@@ -301,12 +300,12 @@ function showMediaContent(index) {
             navigateMedia(1);
         });
         contentDiv.appendChild(video);
-        video.play().catch(e => console.log('Автовоспроизведение заблокировано:', e));
+        video.play().catch(e => console.log('Ошибка воспроизведения видео:', e));
     } else {
-        // Для фото - возобновляем музыку, если она была на паузе из-за видео
-        if (musicWasPlayingBeforeVideo && audioThatWasPlaying && audioThatWasPlaying.paused) {
-            audioThatWasPlaying.play().catch(e => console.log('Не удалось возобновить музыку:', e));
-            const card = audioThatWasPlaying.closest('.track-card-modern');
+        // Фото - возобновляем музыку, если она была на паузе и не видео сейчас
+        if (audioElement && audioElement.paused) {
+            audioElement.play().catch(e => console.log('Ошибка возобновления музыки:', e));
+            const card = audioElement.closest('.track-card-modern');
             if (card) {
                 const icon = card.querySelector('.overlay-icon');
                 if (icon) icon.textContent = '⏸';
@@ -373,6 +372,7 @@ function navigateMedia(direction) {
     
     if (newIndex < 0 || newIndex >= currentMediaList.length) {
         closeMediaModal();
+        resumeCurrentMusic(); // Возобновляем музыку при закрытии
         return;
     }
     
@@ -397,9 +397,6 @@ function closeMediaModal() {
         currentMediaModal = null;
     }
     document.removeEventListener('keydown', handleKeydown);
-    
-    // Возобновляем музыку, если она играла до открытия
-    resumeMusic();
 }
 
 function handleKeydown(e) {
@@ -407,9 +404,8 @@ function handleKeydown(e) {
     if (e.key === 'ArrowLeft') navigateMedia(-1);
     if (e.key === 'ArrowRight') navigateMedia(1);
     if (e.key === 'Escape') {
-        const video = currentMediaModal.querySelector('video');
-        if (video) video.pause();
         closeMediaModal();
+        resumeCurrentMusic(); // Возобновляем музыку при Escape
     }
 }
 
@@ -434,7 +430,7 @@ function renderMainPage() {
                     <div class="card" data-student-id="${member.id}">
                         <div class="card-img">
                             ${member.photoUrl ? 
-                                `<img src="${member.photoUrl}" alt="${member.name}">` : 
+                                `<img src="${member.photoUrl}" alt="${member.name}" style="width:100%; height:100%; object-fit:cover;">` : 
                                 member.photoInitials
                             }
                         </div>
@@ -472,7 +468,7 @@ function renderStudentPage() {
             <div class="student-header">
                 <div class="student-avatar">
                     ${student.photoUrl ? 
-                        `<img src="${student.photoUrl}" alt="${student.name}">` : 
+                        `<img src="${student.photoUrl}" alt="${student.name}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">` : 
                         student.photoInitials
                     }
                 </div>
@@ -585,31 +581,26 @@ function attachEventListeners() {
                     });
                     audio.play();
                     if (icon) icon.textContent = '⏸';
+                    audioElement = audio; // Запоминаем что сейчас играет
                 } else {
                     audio.pause();
                     if (icon) icon.textContent = '▶';
+                    if (audioElement === audio) audioElement = null;
                 }
             });
             
             audio.addEventListener('play', () => {
                 if (icon) icon.textContent = '⏸';
-                audioThatWasPlaying = audio;
-                musicWasPlayingBeforeVideo = true;
+                audioElement = audio;
             });
             
             audio.addEventListener('pause', () => {
                 if (icon) icon.textContent = '▶';
-                if (audioThatWasPlaying === audio && musicWasPlayingBeforeVideo) {
-                    // Не сбрасываем флаг, чтобы потом возобновить
-                }
             });
             
             audio.addEventListener('ended', () => {
                 if (icon) icon.textContent = '▶';
-                if (audioThatWasPlaying === audio) {
-                    audioThatWasPlaying = null;
-                    musicWasPlayingBeforeVideo = false;
-                }
+                if (audioElement === audio) audioElement = null;
             });
         }
     });
