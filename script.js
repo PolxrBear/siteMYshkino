@@ -213,6 +213,17 @@ function getStudentById(id) {
 function openMediaModal(mediaList, startIndex = 0) {
     if (!mediaList || mediaList.length === 0) return;
     
+    // Останавливаем всю музыку
+    document.querySelectorAll('audio').forEach(audio => {
+        audio.pause();
+        audio.currentTime = 0;
+        const card = audio.closest('.track-card-modern');
+        if (card) {
+            const icon = card.querySelector('.overlay-icon');
+            if (icon) icon.textContent = '▶';
+        }
+    });
+    
     currentMediaList = mediaList;
     currentMediaIndex = startIndex;
     
@@ -433,7 +444,6 @@ function renderStudentPage() {
             </div>
         </div>
         <div class="student-page">
-            <button class="back-btn" data-back-main>🏠 Вернуться к команде</button>
             <div class="student-header">
                 <div class="student-avatar">
                     ${student.photoUrl ? 
@@ -538,19 +548,38 @@ function attachEventListeners() {
         const icon = card.querySelector('.overlay-icon');
         
         if (audio && wrapper) {
+            // Функция для остановки всех других аудио
+            function stopAllOtherAudio(currentAudio) {
+                document.querySelectorAll('audio').forEach(a => {
+                    if (a !== currentAudio && !a.paused) {
+                        a.pause();
+                        a.currentTime = 0;
+                        const otherCard = a.closest('.track-card-modern');
+                        if (otherCard) {
+                            const otherIcon = otherCard.querySelector('.overlay-icon');
+                            if (otherIcon) otherIcon.textContent = '▶';
+                        }
+                    }
+                });
+            }
+            
+            // Обработчик для STOP всех ВИДЕО в медиа-модалке
+            function stopAllVideos() {
+                const modal = document.querySelector('.media-modal');
+                if (modal) {
+                    const videos = modal.querySelectorAll('video');
+                    videos.forEach(video => {
+                        video.pause();
+                    });
+                }
+            }
+            
             wrapper.addEventListener('click', () => {
                 if (audio.paused) {
-                    document.querySelectorAll('audio').forEach(a => {
-                        if (a !== audio && !a.paused) {
-                            a.pause();
-                            a.currentTime = 0;
-                            const otherCard = a.closest('.track-card-modern');
-                            if (otherCard) {
-                                const otherIcon = otherCard.querySelector('.overlay-icon');
-                                if (otherIcon) otherIcon.textContent = '▶';
-                            }
-                        }
-                    });
+                    // Останавливаем все другие аудио
+                    stopAllOtherAudio(audio);
+                    // Останавливаем все видео в модалке, если она открыта
+                    stopAllVideos();
                     audio.play();
                     if (icon) icon.textContent = '⏸';
                 } else {
