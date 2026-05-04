@@ -508,3 +508,216 @@ audio {
         transform: scale(1);
     }
 }
+
+
+
+/* ------- Истории ------- */
+
+
+
+/* =============================== */
+
+/* Большие круглые кнопки категорий */
+.categories-circle-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+    padding: 1rem;
+}
+
+.category-circle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    width: 120px;
+}
+
+.category-circle:hover {
+    transform: translateY(-5px);
+}
+
+.category-circle-ring {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 4px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+}
+
+.category-circle:hover .category-circle-ring {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.category-circle-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+}
+
+.category-circle-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #2c3e50;
+}
+
+.category-empty {
+    font-size: 0.7rem;
+    color: #999;
+}
+
+/* Модальное окно для медиа (на весь экран) */
+.media-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.media-container {
+    width: 100%;
+    height: 100%;
+    background: black;
+    position: relative;
+}
+
+.media-progress-bars {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    display: flex;
+    gap: 5px;
+    z-index: 10;
+}
+
+.media-progress-bar {
+    flex: 1;
+    height: 3px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.media-progress-fill {
+    height: 100%;
+    background: white;
+    width: 0%;
+    transition: width linear;
+}
+
+.media-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.media-content img,
+.media-content video {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.media-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    z-index: 5;
+}
+
+.media-left, .media-right {
+    flex: 1;
+    cursor: pointer;
+}
+
+.media-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.6);
+    border: none;
+    color: white;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    transition: background 0.2s;
+}
+
+.media-close:hover {
+    background: rgba(0,0,0,0.8);
+}
+
+/* Музыкальная секция внизу */
+.music-section-full {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f8fafd;
+    border-radius: 1.5rem;
+    border: 1px solid #e2e8f0;
+}
+
+.music-section-full h3 {
+    margin-bottom: 1rem;
+    color: #805ad5;
+    font-size: 1.3rem;
+}
+
+.tracks-list-modern {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+/* Адаптив для кружков */
+@media (max-width: 600px) {
+    .categories-circle-grid {
+        gap: 1rem;
+    }
+    
+    .category-circle {
+        width: 90px;
+    }
+    
+    .category-circle-ring {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .category-circle-inner {
+        font-size: 2rem;
+    }
+    
+    .category-circle-title {
+        font-size: 0.8rem;
+    }
+}
