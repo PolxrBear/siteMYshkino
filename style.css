@@ -107,13 +107,27 @@ body {
     color: white;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     overflow: hidden;
+    position: relative;
 }
 
 .card-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform 0.3s ease;
+}
+
+/* Для мобильных - показываем фото целиком */
+@media (max-width: 768px) {
+    .card-img {
+        height: 200px;
+    }
+    
+    .card-img img {
+        object-fit: contain;
+        background: linear-gradient(120deg, #96b9d4, #6a8eaa);
+    }
 }
 
 .card:hover .card-img img {
@@ -163,26 +177,6 @@ body {
     padding: 1.2rem;
     box-shadow: 0 15px 35px rgba(0,0,0,0.05);
     margin: 1rem 0;
-}
-
-.back-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: none;
-    border: none;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #2b5f8a;
-    cursor: pointer;
-    margin-bottom: 1rem;
-    padding: 0.4rem 0.8rem;
-    border-radius: 2rem;
-    transition: 0.2s;
-}
-
-.back-btn:hover {
-    background: #e9eff5;
 }
 
 .student-header {
