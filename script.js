@@ -202,6 +202,9 @@ let currentMediaModal = null;
 let currentMediaList = [];
 let currentMediaIndex = 0;
 let currentCategoryKey = null;
+let pausedMusicTrack = null;        // Запоминаем трек, который поставили на паузу
+let wasMusicPlaying = false;         // Флаг, играла ли музыка до открытия видео
+let currentPlayingAudio = null;      // Текущий играющий аудио-элемент
 
 const app = document.getElementById("app");
 
@@ -213,14 +216,15 @@ function getStudentById(id) {
 function openMediaModal(mediaList, startIndex = 0) {
     if (!mediaList || mediaList.length === 0) return;
     
-    // Останавливаем всю музыку
+    // Запоминаем, играет ли сейчас музыка
+    wasMusicPlaying = false;
+    pausedMusicTrack = null;
+    
+    // Находим текущий играющий аудио
     document.querySelectorAll('audio').forEach(audio => {
-        audio.pause();
-        audio.currentTime = 0;
-        const card = audio.closest('.track-card-modern');
-        if (card) {
-            const icon = card.querySelector('.overlay-icon');
-            if (icon) icon.textContent = '▶';
+        if (!audio.paused) {
+            wasMusicPlaying = true;
+            currentPlayingAudio = audio;
         }
     });
     
@@ -287,6 +291,18 @@ function showMediaContent(index) {
     contentDiv.innerHTML = '';
     
     if (media.type === 'video') {
+        // Если это видео - ставим музыку на паузу
+        if (currentPlayingAudio && !currentPlayingAudio.paused) {
+            pausedMusicTrack = currentPlayingAudio;
+            currentPlayingAudio.pause();
+            // Обновляем иконку
+            const card = currentPlayingAudio.closest('.track-card-modern');
+            if (card) {
+                const icon = card.querySelector('.overlay-icon');
+                if (icon) icon.textContent = '▶';
+            }
+        }
+        
         const video = document.createElement('video');
         video.src = media.url;
         video.autoplay = true;
@@ -301,6 +317,27 @@ function showMediaContent(index) {
         contentDiv.appendChild(video);
         video.play().catch(e => console.log('Автовоспроизведение заблокировано:', e));
     } else {
+        // Если это фото - возобновляем музыку, если она была поставлена на паузу из-за видео
+        if (pausedMusicTrack && pausedMusicTrack.paused) {
+            pausedMusicTrack.play().catch(e => console.log('Не удалось возобновить музыку:', e));
+            // Обновляем иконку
+            const card = pausedMusicTrack.closest('.track-card-modern');
+            if (card) {
+                const icon = card.querySelector('.overlay-icon');
+                if (icon) icon.textContent = '⏸';
+            }
+            currentPlayingAudio = pausedMusicTrack;
+            pausedMusicTrack = null;
+        } else if (wasMusicPlaying && currentPlayingAudio && currentPlayingAudio.paused && !pausedMusicTrack) {
+            // Если музыка играла до открытия модалки, но сейчас на паузе (не из-за видео)
+            currentPlayingAudio.play().catch(e => console.log('Не удалось возобновить музыку:', e));
+            const card = currentPlayingAudio.closest('.track-card-modern');
+            if (card) {
+                const icon = card.querySelector('.overlay-icon');
+                if (icon) icon.textContent = '⏸';
+            }
+        }
+        
         const img = document.createElement('img');
         img.src = media.url;
         img.style.width = '100%';
@@ -364,6 +401,15 @@ function navigateMedia(direction) {
         return;
     }
     
+    // При переключении с видео на следующий элемент
+    const currentMedia = currentMediaList[currentMediaIndex];
+    if (currentMedia.type === 'video') {
+        // Останавливаем видео
+        const contentDiv = currentMediaModal.querySelector('#mediaContent');
+        const video = contentDiv.querySelector('video');
+        if (video) video.pause();
+    }
+    
     currentMediaIndex = newIndex;
     showMediaContent(currentMediaIndex);
     startMediaTimer();
@@ -378,13 +424,30 @@ function closeMediaModal() {
         currentMediaModal = null;
     }
     document.removeEventListener('keydown', handleKeydown);
+    
+    // Возобновляем музыку, если она была на паузе из-за видео
+    if (pausedMusicTrack && pausedMusicTrack.paused) {
+        pausedMusicTrack.play().catch(e => console.log('Не удалось возобновить музыку:', e));
+        const card = pausedMusicTrack.closest('.track-card-modern');
+        if (card) {
+            const icon = card.querySelector('.overlay-icon');
+            if (icon) icon.textContent = '⏸';
+        }
+        currentPlayingAudio = pausedMusicTrack;
+        pausedMusicTrack = null;
+    }
 }
 
 function handleKeydown(e) {
     if (!currentMediaModal) return;
     if (e.key === 'ArrowLeft') navigateMedia(-1);
     if (e.key === 'ArrowRight') navigateMedia(1);
-    if (e.key === 'Escape') closeMediaModal();
+    if (e.key === 'Escape') {
+        // Принудительно останавливаем видео перед закрытием
+        const video = currentMediaModal.querySelector('video');
+        if (video) video.pause();
+        closeMediaModal();
+    }
 }
 
 // Рендер главной страницы
@@ -590,10 +653,15 @@ function attachEventListeners() {
             
             audio.addEventListener('play', () => {
                 if (icon) icon.textContent = '⏸';
+                currentPlayingAudio = audio;  // Сохраняем текущий играющий трек
+                pausedMusicTrack = null;       // Сбрасываем запомненную паузу
             });
             
             audio.addEventListener('pause', () => {
                 if (icon) icon.textContent = '▶';
+                if (currentPlayingAudio === audio) {
+                    currentPlayingAudio = null;
+                }
             });
             
             audio.addEventListener('ended', () => {
