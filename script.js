@@ -36,8 +36,10 @@ const teamData = {
                 hobby: {
                     title: "🎨 Хобби",
                     media: [
+                        { type: "image", url: "stories/pavel/hobby1.jpg" },
+                        { type: "image", url: "stories/pavel/hobby2.jpg" },
                         { type: "video", url: "stories/pavel/hobby1.mp4" },
-                        { type: "image", url: "stories/pavel/hobby1.jpg" }
+                        { type: "image", url: "stories/pavel/hobby3.jpg" },
                     ]
                 },
                 music: {
@@ -325,7 +327,7 @@ let mediaTimer = null;
 function startMediaTimer() {
     if (mediaTimer) clearInterval(mediaTimer);
     
-    const duration = 30000; // 5 секунд
+    const duration = 30000;
     const startTime = Date.now();
     const activeBar = currentMediaModal.querySelector('.media-progress-bar.active');
     if (!activeBar) return;
