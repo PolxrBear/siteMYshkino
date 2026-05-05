@@ -5,25 +5,23 @@
 }
 
 body {
-    font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+    font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
     background: linear-gradient(145deg, #f8f9fc 0%, #eef2f7 100%);
     color: #1a2c3e;
     line-height: 1.5;
-    scroll-behavior: smooth;
+    padding-bottom: 80px;
 }
 
-/* обертка */
 .container {
     max-width: 1300px;
     margin: 0 auto;
     padding: 1rem;
 }
 
-/* хедер и навигация */
+/* Хедер */
 .site-header {
     background: #ffffffdd;
     backdrop-filter: blur(10px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
     border-radius: 1.5rem;
     margin-bottom: 1.5rem;
     padding: 1rem 1.5rem;
@@ -32,6 +30,7 @@ body {
     justify-content: space-between;
     align-items: center;
     border: 1px solid rgba(255,255,255,0.6);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
 }
 
 .logo h1 {
@@ -41,19 +40,11 @@ body {
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    letter-spacing: -0.5px;
 }
 
 .logo p {
     font-size: 0.7rem;
     color: #4a627a;
-    font-weight: 500;
-}
-
-.nav-links {
-    display: flex;
-    gap: 0.8rem;
-    flex-wrap: wrap;
 }
 
 .nav-links a {
@@ -65,15 +56,15 @@ body {
     border-radius: 2rem;
     transition: all 0.2s ease;
     font-size: 0.9rem;
+    cursor: pointer;
 }
 
 .nav-links a:hover {
     background: #2b5f8a;
     color: white;
-    transform: translateY(-2px);
 }
 
-/* карточки команды */
+/* Карточки команды */
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -88,7 +79,6 @@ body {
     box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
     transition: all 0.25s ease;
     cursor: pointer;
-    border: 1px solid #e9edf2;
 }
 
 .card:hover {
@@ -105,42 +95,18 @@ body {
     font-size: 3rem;
     font-weight: bold;
     color: white;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     overflow: hidden;
-    position: relative;
 }
 
 .card-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    transition: transform 0.3s ease;
-}
-
-/* Для мобильных - показываем фото целиком */
-@media (max-width: 768px) {
-    .card-img {
-        height: 200px;
-    }
-    
-    .card-img img {
-        object-fit: contain;
-        background: linear-gradient(120deg, #96b9d4, #6a8eaa);
-    }
-}
-
-.card:hover .card-img img {
-    transform: scale(1.05);
 }
 
 .card-content {
     padding: 1rem;
-}
-
-.card-content h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.2rem;
+    text-align: center;
 }
 
 .name-badge {
@@ -151,32 +117,16 @@ body {
     font-weight: 700;
     padding: 0.4rem 1.2rem;
     border-radius: 40px;
-    margin-bottom: 0;
-    text-align: center;
     width: 100%;
     border: 1px solid rgba(44, 98, 130, 0.2);
-    transition: all 0.2s ease;
-    letter-spacing: 0.3px;
 }
 
-.name-badge:hover {
-    background: linear-gradient(135deg, #e8eff8, #dce6f0);
-    transform: translateY(-1px);
-    box-shadow: 0 2px 6px rgba(44, 98, 130, 0.15);
-}
-
-.card-content p {
-    color: #4b5e72;
-    margin-top: 0.5rem;
-    font-size: 0.85rem;
-}
-
+/* Страница студента */
 .student-page {
     background: white;
     border-radius: 1.5rem;
     padding: 1.2rem;
     box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-    margin: 1rem 0;
 }
 
 .student-header {
@@ -200,7 +150,6 @@ body {
     font-size: 2rem;
     font-weight: bold;
     color: #2b4f6e;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     overflow: hidden;
 }
 
@@ -215,33 +164,19 @@ body {
     margin-bottom: 0.2rem;
 }
 
-.student-role {
-    font-size: 0.85rem;
-    background: #dce6f0;
-    padding: 0.2rem 0.8rem;
-    border-radius: 30px;
-    display: inline-block;
-}
-
 .contacts {
-    margin-top: 0.5rem;
     font-size: 0.75rem;
     color: #2c6282;
     word-break: break-all;
 }
 
-.contacts img {
-    vertical-align: middle;
-}
-
-/* Большие круглые кнопки категорий */
+/* Круглые кнопки категорий */
 .categories-circle-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
     margin: 1.5rem 0;
-    padding: 0.5rem;
 }
 
 .category-circle {
@@ -262,15 +197,9 @@ body {
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #667eea, #764ba2);
     padding: 3px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    transition: all 0.3s;
-}
-
-.category-circle:hover .category-circle-ring {
-    transform: scale(1.05);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
 .category-circle-inner {
@@ -296,8 +225,8 @@ body {
     color: #999;
 }
 
-/* Музыкальная секция */
-.music-section-full {
+/* Галерея */
+.random-gallery {
     margin-top: 1.5rem;
     padding: 1rem;
     background: #f8fafd;
@@ -305,117 +234,37 @@ body {
     border: 1px solid #e2e8f0;
 }
 
-.music-section-full h3 {
-    margin-bottom: 0.8rem;
-    color: #805ad5;
+.random-gallery h3 {
+    margin-bottom: 1rem;
+    color: #2c6282;
     font-size: 1.1rem;
 }
 
-.tracks-list-modern {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
 }
 
-/* Современный музыкальный плеер с обложками (мобильная версия) */
-.track-card-modern {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: #f8fafd;
-    border-radius: 12px;
-    padding: 10px;
-    transition: all 0.3s ease;
-    border: 1px solid #e2e8f0;
-}
-
-.track-card-modern:hover {
-    background: #ffffff;
-    box-shadow: 0 2px 10px rgba(128, 90, 213, 0.1);
-}
-
-/* Круглая обложка */
-.track-cover-wrapper {
-    position: relative;
-    flex-shrink: 0;
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-}
-
-.track-cover {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #805ad5;
-    box-shadow: 0 2px 6px rgba(128, 90, 213, 0.3);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    display: block;
-}
-
-.track-card-modern:hover .track-cover {
-    transform: scale(1.03);
-    border-color: #6b46c1;
-}
-
-/* Оверлей при наведении */
-.track-play-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: rgba(128, 90, 213, 0.85);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 16px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    cursor: pointer;
-}
-
-.track-cover-wrapper:hover .track-play-overlay {
-    opacity: 1;
-}
-
-.track-cover-wrapper:hover .track-cover {
-    filter: brightness(0.85);
-}
-
-.overlay-icon {
-    font-size: 14px;
-    margin-left: 2px;
-}
-
-/* Информация о треке */
-.track-info-modern {
-    flex: 1;
-    min-width: 0;
-}
-
-.track-name-modern {
-    font-weight: 600;
-    color: #1a2c3e;
-    margin-bottom: 6px;
-    font-size: 0.8rem;
-    white-space: nowrap;
+.gallery-item {
+    aspect-ratio: 1;
+    border-radius: 1rem;
     overflow: hidden;
-    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: transform 0.2s;
 }
 
-/* Аудио плеер - мобильная оптимизация */
-.track-info-modern audio {
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.gallery-item img {
     width: 100%;
-    height: 36px;
-    border-radius: 20px;
+    height: 100%;
+    object-fit: cover;
 }
 
-/* Модальное окно для медиа */
+/* Медиа-просмотрщик */
 .media-modal {
     position: fixed;
     top: 0;
@@ -423,7 +272,7 @@ body {
     width: 100%;
     height: 100%;
     background: black;
-    z-index: 1000;
+    z-index: 1100;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -432,7 +281,6 @@ body {
 .media-container {
     width: 100%;
     height: 100%;
-    background: black;
     position: relative;
 }
 
@@ -458,7 +306,6 @@ body {
     height: 100%;
     background: white;
     width: 0%;
-    transition: width linear;
 }
 
 .media-content {
@@ -469,8 +316,7 @@ body {
     justify-content: center;
 }
 
-.media-content img,
-.media-content video {
+.media-content img, .media-content video {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
@@ -483,13 +329,11 @@ body {
     right: 0;
     bottom: 0;
     display: flex;
-    z-index: 5;
 }
 
 .media-left, .media-right {
     flex: 1;
     cursor: pointer;
-    min-width: 60px;
 }
 
 .media-close {
@@ -503,18 +347,262 @@ body {
     width: 36px;
     height: 36px;
     border-radius: 50%;
+    cursor: pointer;
+    z-index: 20;
+}
+
+/* Аудиоплеер (большой) */
+.player-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.95);
+    z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: center;
+    backdrop-filter: blur(20px);
+}
+
+.player-container {
+    width: 90%;
+    max-width: 500px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 2rem;
+    padding: 2rem;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.player-cover {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.player-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.player-track-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.player-artist {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.8);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.player-progress-container {
+    margin-bottom: 1.5rem;
+}
+
+.player-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 2px;
     cursor: pointer;
-    z-index: 20;
-    transition: background 0.2s;
+    position: relative;
 }
 
-.media-close:hover {
-    background: rgba(0,0,0,0.8);
+.player-progress-fill {
+    width: 0%;
+    height: 100%;
+    background: white;
+    border-radius: 2px;
+    transition: width 0.1s linear;
 }
 
+.player-time {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.75rem;
+}
+
+.player-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.player-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.player-btn:hover {
+    transform: scale(1.1);
+}
+
+.player-btn svg {
+    width: 32px;
+    height: 32px;
+    fill: white;
+}
+
+.player-play svg {
+    width: 48px;
+    height: 48px;
+}
+
+.player-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.player-close:hover {
+    background: rgba(255,255,255,0.3);
+    transform: rotate(90deg);
+}
+
+/* Мини-плеер внизу экрана */
+.mini-player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    backdrop-filter: blur(20px);
+    padding: 12px 20px;
+    display: none;
+    align-items: center;
+    gap: 15px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    z-index: 1000;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+}
+
+.mini-player.show {
+    display: flex;
+}
+
+.mini-player-cover {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.mini-player-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mini-player-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.mini-player-title {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mini-player-artist {
+    color: rgba(255,255,255,0.7);
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mini-player-controls {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.mini-player-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.mini-player-btn:hover {
+    transform: scale(1.1);
+}
+
+.mini-player-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+}
+
+.mini-player-play svg {
+    width: 32px;
+    height: 32px;
+}
+
+.mini-player-close {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px;
+    transition: all 0.2s;
+}
+
+.mini-player-close:hover {
+    color: white;
+    transform: rotate(90deg);
+}
+
+/* Футер */
 .footer {
     margin-top: 2rem;
     text-align: center;
@@ -524,45 +612,14 @@ body {
     border-top: 1px solid #dce5ec;
 }
 
-/* ============================================ */
-/* МОБИЛЬНАЯ АДАПТАЦИЯ (до 768px) */
-/* ============================================ */
-
+/* Мобильная адаптация */
 @media (max-width: 768px) {
     .container {
         padding: 0.8rem;
     }
     
-    .site-header {
-        padding: 0.8rem 1rem;
-        margin-bottom: 1rem;
-    }
-    
-    .logo h1 {
-        font-size: 1.2rem;
-    }
-    
-    .logo p {
-        font-size: 0.6rem;
-    }
-    
     .team-grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
-        margin: 1.5rem 0;
-    }
-    
-    .card-img {
-        height: 150px;
-    }
-    
-    .card-content h3 {
-        font-size: 1.1rem;
-    }
-    
-    /* Круглые кнопки категорий на мобилках */
-    .categories-circle-grid {
-        gap: 0.8rem;
     }
     
     .category-circle {
@@ -578,230 +635,44 @@ body {
         font-size: 1.6rem;
     }
     
-    .category-circle-title {
-        font-size: 0.65rem;
-    }
-    
-    /* Музыка на мобилках - вертикальное расположение */
-    .track-card-modern {
-        flex-direction: column;
-        text-align: center;
-        padding: 12px;
-        gap: 10px;
-    }
-    
-    .track-cover-wrapper {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .track-cover {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .track-name-modern {
-        white-space: normal;
-        word-break: break-word;
-        font-size: 0.85rem;
-        text-align: center;
-    }
-    
-    .track-info-modern {
-        width: 100%;
-    }
-    
-    .track-info-modern audio {
-        height: 42px;
-    }
-    
-    /* Студент на мобилках */
     .student-header {
         flex-direction: column;
         text-align: center;
-        gap: 0.8rem;
     }
     
-    .student-avatar {
-        width: 70px;
-        height: 70px;
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     }
     
-    .student-info h2 {
-        font-size: 1.3rem;
+    .player-container {
+        width: 95%;
+        padding: 1.5rem;
     }
     
-    .student-role {
-        font-size: 0.75rem;
+    .mini-player {
+        padding: 10px 15px;
     }
     
-    .contacts {
-        font-size: 0.7rem;
-        word-break: break-word;
+    .mini-player-cover {
+        width: 40px;
+        height: 40px;
     }
     
-    .music-section-full {
-        padding: 0.8rem;
+    .mini-player-title {
+        font-size: 12px;
     }
     
-    .music-section-full h3 {
-        font-size: 1rem;
+    .mini-player-artist {
+        font-size: 10px;
     }
     
-    /* Области для листания историй */
-    .media-left, .media-right {
-        min-width: 40px;
+    .mini-player-btn svg {
+        width: 20px;
+        height: 20px;
     }
     
-    .media-close {
-        top: 10px;
-        right: 10px;
-        width: 32px;
-        height: 32px;
-        font-size: 18px;
+    .mini-player-play svg {
+        width: 28px;
+        height: 28px;
     }
-}
-
-/* ============================================ */
-/* ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 480px) */
-/* ============================================ */
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0.5rem;
-    }
-    
-    .categories-circle-grid {
-        gap: 0.6rem;
-    }
-    
-    .category-circle {
-        width: 65px;
-    }
-    
-    .category-circle-ring {
-        width: 55px;
-        height: 55px;
-    }
-    
-    .category-circle-inner {
-        font-size: 1.4rem;
-    }
-    
-    .category-circle-title {
-        font-size: 0.6rem;
-    }
-    
-    .track-cover-wrapper {
-        width: 70px;
-        height: 70px;
-    }
-    
-    .track-cover {
-        width: 70px;
-        height: 70px;
-    }
-    
-    .track-name-modern {
-        font-size: 0.75rem;
-    }
-    
-    .student-page {
-        padding: 0.8rem;
-    }
-    
-    .back-btn {
-        font-size: 0.8rem;
-        margin-bottom: 0.8rem;
-    }
-}
-
-/* ============================================ */
-/* ПЛАНШЕТЫ (768px - 1024px) */
-/* ============================================ */
-
-@media (min-width: 769px) and (max-width: 1024px) {
-    .team-grid {
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-        gap: 1.2rem;
-    }
-    
-    .category-circle {
-        width: 100px;
-    }
-    
-    .category-circle-ring {
-        width: 85px;
-        height: 85px;
-    }
-    
-    .category-circle-inner {
-        font-size: 2.5rem;
-    }
-    
-    .track-card-modern {
-        gap: 15px;
-    }
-    
-    .track-cover-wrapper {
-        width: 55px;
-        height: 55px;
-    }
-}
-
-/* ============================================ */
-/* АЛЬБОМНАЯ ОРИЕНТАЦИЯ НА МОБИЛКАХ */
-/* ============================================ */
-
-@media (max-width: 768px) and (orientation: landscape) {
-    .category-circle {
-        width: 70px;
-    }
-    
-    .category-circle-ring {
-        width: 55px;
-        height: 55px;
-    }
-    
-    .category-circle-inner {
-        font-size: 1.5rem;
-    }
-    
-    .track-card-modern {
-        flex-direction: row;
-        text-align: left;
-    }
-    
-    .track-cover-wrapper {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .track-name-modern {
-        white-space: nowrap;
-        text-align: left;
-    }
-}
-
-/* ============================================ */
-/* АНИМАЦИИ */
-/* ============================================ */
-
-@keyframes coverPulse {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(128, 90, 213, 0.7);
-    }
-    50% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 6px rgba(128, 90, 213, 0.3);
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(128, 90, 213, 0);
-    }
-}
-
-.track-cover:active {
-    animation: coverPulse 0.25s ease-in-out;
 }
