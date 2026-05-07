@@ -4,16 +4,16 @@
 
 const teamData = {
     name: "МЫшкино",  // Название команды (отображается в заголовке)
-    theme: "Кто мы такие, и причём тут матмех",  // Слоган или тема команды
+    theme: "Кто мы такие, и причём тут матмех",  // тема команды
     members: [  // Массив участников команды (5 человек)
         // ========== УЧАСТНИК 1: Елисеев Павел ==========
         {
-            id: "pavel",                           // Уникальный идентификатор (для ссылок)
-            name: "Елисеев Павел",                 // Полное имя участника
+            id: "pavel",                           // id (для ссылок)
+            name: "Елисеев Павел",                 // имя участника
             photoUrl: "avatarsSite/pavel.jpg",     // Путь к файлу фото (если есть)
             photoInitials: "ПЕ",                   // Инициалы (если фото отсутствует)
             contacts: "<img src='icons/telegram.jpg' style='width:16px;height:16px;vertical-align:middle;'> @polxrknight | 📱 +7 (922) 132-51-75 | 📧 eliseev.p25175@gmail.com",  // Контакты в HTML
-            gallery: [  // Массив случайных фото для галереи
+            gallery: [  // Массив фото для галереи
                 "stories/pavel/random1.jpg",
                 "stories/pavel/random2.jpg",
                 "stories/pavel/random3.jpg",
@@ -47,7 +47,8 @@ const teamData = {
                     media: [
                         { type: "image", url: "stories/pavel/hobby1.jpg" },
                         { type: "image", url: "stories/pavel/hobby2.jpg" },
-                        { type: "video", url: "stories/pavel/hobby1.mp4" }
+                        { type: "video", url: "stories/pavel/hobby1.mp4" },
+                        { type: "image", url: "stories/pavel/hobby3.jpg" }
                     ]
                 },
                 music: {  // Категория "Музыка" (содержит треки вместо медиа)
@@ -135,7 +136,16 @@ const teamData = {
                 general: { title: "📖 О себе", media: [] },
                 study: { title: "📚 Учёба", media: [] },
                 sport: { title: "⚽ Спорт", media: [] },
-                hobby: { title: "🎨 Хобби", media: [] },
+                hobby: { 
+                    title: "🎨 Хобби",
+                    media: [
+                        { type: "video", url: "stories/polina/hobby1.mp4" },
+                        { type: "image", url: "stories/polina/hobby1.jpg" },
+                        { type: "video", url: "stories/polina/hobby2.mp4" },
+                        { type: "image", url: "stories/polina/hobby2.jpg" },
+                        { type: "image", url: "stories/polina/hobby3.jpg" }
+                    ]
+                },
                 music: {
                     title: "🎧 Музыка",
                     tracks: [
@@ -160,7 +170,15 @@ const teamData = {
                 "stories/kseniya/random2.jpg"
             ],
             categories: {
-                general: { title: "📖 О себе", media: [] },
+                general: { 
+                    title: "📖 О себе", 
+                    media: [
+                        { type: "video", url: "stories/kseniya/hobby2.mp4" },
+                        { type: "image", url: "stories/kseniya/hobby1.jpg" },
+                        { type: "video", url: "stories/kseniya/hobby1.mp4" },
+                        { type: "image", url: "stories/kseniya/hobby2.jpg" }
+                    ] 
+                },
                 study: { title: "📚 Учёба", media: [] },
                 sport: { title: "⚽ Спорт", media: [] },
                 hobby: { title: "🎨 Хобби", media: [] },
