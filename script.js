@@ -47,7 +47,7 @@ const teamData = {
                     media: [
                         { type: "image", url: "stories/pavel/hobby1.jpg" },
                         { type: "image", url: "stories/pavel/hobby2.jpg" },
-                        { type: "video", url: "stories/pavel/hobby1.mp4" }
+                        { type: "video", url: "stories/pavel/hobby1.mp4" },
                     ]
                 },
                 music: {  // Категория "Музыка" (содержит треки вместо медиа)
@@ -165,8 +165,8 @@ const teamData = {
             photoInitials: "КГ",
             contacts: "",
             gallery: [
-                "stories/kseniya/random1.jpg",
-                "stories/kseniya/random2.jpg"
+                "stories/kseniya/gallery1.jpg",
+                "stories/kseniya/gallery2.jpg"           
             ],
             categories: {
                 general: { 
