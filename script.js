@@ -47,8 +47,7 @@ const teamData = {
                     media: [
                         { type: "image", url: "stories/pavel/hobby1.jpg" },
                         { type: "image", url: "stories/pavel/hobby2.jpg" },
-                        { type: "video", url: "stories/pavel/hobby1.mp4" },
-                        { type: "image", url: "stories/pavel/hobby3.jpg" }
+                        { type: "video", url: "stories/pavel/hobby1.mp4" }
                     ]
                 },
                 music: {  // Категория "Музыка" (содержит треки вместо медиа)
