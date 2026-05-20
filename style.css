@@ -318,68 +318,34 @@ body {
 /* Мини-плеер */
 .mini-player {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
-    backdrop-filter: blur(20px);
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #1e1e3a, #15152a);
+    border-radius: 1rem;
     padding: 12px 20px;
-    display: none;
+    display: flex;
     align-items: center;
-    gap: 15px;
-    border-top: 1px solid rgba(64, 224, 208, 0.4);
-    z-index: 9999;
-    box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+    justify-content: space-between;
+    gap: 20px;
+    border: 1px solid rgba(64,224,208,0.4);
+    backdrop-filter: blur(10px);
+    z-index: 10000;
+    display: none; /* Скрыт по умолчанию */
 }
 
-.mini-player-progress-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    cursor: pointer;
-}
-
-.mini-player-progress-bar {
-    width: 100%;
-    height: 100%;
-    background: rgba(100, 150, 255, 0.2);
-    position: relative;
-}
-
-.mini-player-progress-fill {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, #40e0d0, #20b2aa);
-    border-radius: 3px;
-}
-
-.mini-player-progress-thumb {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 10px;
-    height: 10px;
-    background: #40e0d0;
-    border-radius: 50%;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    box-shadow: 0 0 6px #40e0d0;
-    pointer-events: none;
-    margin-left: -5px;
-}
-
-.mini-player-progress-container:hover .mini-player-progress-thumb {
-    opacity: 1;
+.mini-player-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 180px;
 }
 
 .mini-player-cover {
-    width: 50px;
-    height: 50px;
-    border-radius: 8px;
+    width: 48px;
+    height: 48px;
+    border-radius: 0.5rem;
     overflow: hidden;
-    flex-shrink: 0;
 }
 
 .mini-player-cover img {
@@ -390,72 +356,156 @@ body {
 
 .mini-player-info {
     flex: 1;
-    min-width: 0;
 }
 
 .mini-player-title {
     color: white;
-    font-size: 14px;
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 4px;
 }
 
 .mini-player-artist {
     color: #8b9dc3;
-    font-size: 12px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 0.75rem;
 }
 
-.mini-player-controls {
+.mini-player-center {
+    flex: 2;
+    max-width: 400px;
+}
+
+.mini-player-progress-container {
+    cursor: pointer;
+    touch-action: none;
+    margin-bottom: 6px;
+    position: relative;
+}
+
+.mini-player-progress-bar {
+    position: relative;
+    height: 4px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    touch-action: none;
+}
+
+.mini-player-progress-fill {
+    position: absolute;
+    height: 100%;
+    background: #40e0d0;
+    border-radius: 2px;
+    width: 0%;
+}
+
+.mini-player-progress-thumb {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #40e0d0;
+    border-radius: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    touch-action: none;
+    z-index: 10;
+    left: 0%;
+}
+
+.mini-player-time {
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: #8b9dc3;
+}
+
+.mini-player-right {
+    display: flex;
     align-items: center;
-    flex-shrink: 0;
+    gap: 8px;
 }
 
 .mini-player-btn {
-    background: none;
+    background: rgba(64,224,208,0.2);
     border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
     cursor: pointer;
-    padding: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s;
+    transition: all 0.2s;
 }
 
 .mini-player-btn:hover {
-    transform: scale(1.1);
+    background: rgba(64,224,208,0.4);
+    transform: scale(1.05);
 }
 
-.mini-player-btn svg {
-    width: 24px;
-    height: 24px;
-    fill: #cbd5e1;
-}
-
-.mini-player-play svg {
-    width: 32px;
-    height: 32px;
-    fill: #40e0d0;
+.mini-player-play {
+    width: 44px;
+    height: 44px;
 }
 
 .mini-player-close {
-    background: none;
+    background: rgba(255,255,255,0.1);
     border: none;
-    color: #64748b;
-    font-size: 20px;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
     cursor: pointer;
-    padding: 8px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.2s;
 }
 
 .mini-player-close:hover {
-    color: #ef4444;
+    background: rgba(255,255,255,0.2);
+    transform: scale(1.05);
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .mini-player {
+        padding: 10px 15px;
+        gap: 10px;
+    }
+    
+    .mini-player-left {
+        min-width: 120px;
+    }
+    
+    .mini-player-cover {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .mini-player-title {
+        font-size: 0.8rem;
+    }
+    
+    .mini-player-artist {
+        font-size: 0.7rem;
+    }
+    
+    .mini-player-center {
+        max-width: 200px;
+    }
+    
+    .mini-player-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .mini-player-play {
+        width: 38px;
+        height: 38px;
+    }
 }
 
 /* Футер */
@@ -525,66 +575,6 @@ body {
 .playlist-track:hover {
     background: rgba(64, 224, 208, 0.15) !important;
     transform: translateX(5px);
-}
-
-/* Мобильная адаптация */
-@media (max-width: 768px) {
-    .container {
-        padding: 0.8rem;
-    }
-    
-    .team-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .category-circle {
-        width: 75px;
-    }
-    
-    .category-circle-ring {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .category-circle-inner {
-        font-size: 1.6rem;
-    }
-    
-    .student-header {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    }
-    
-    .mini-player {
-        padding: 10px 15px;
-    }
-    
-    .mini-player-cover {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .mini-player-title {
-        font-size: 12px;
-    }
-    
-    .mini-player-artist {
-        font-size: 10px;
-    }
-    
-    .mini-player-btn svg {
-        width: 20px;
-        height: 20px;
-    }
-    
-    .mini-player-play svg {
-        width: 28px;
-        height: 28px;
-    }
 }
 
 /* Разрешаем зум для фото в модальном окне */
