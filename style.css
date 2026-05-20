@@ -603,3 +603,30 @@ video {
     user-select: auto !important;
     touch-action: pan-x pan-y pinch-zoom !important;
 }
+
+/* превью для категорий */
+
+.category-circle-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.category-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+} 
+
+.category-preview-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
