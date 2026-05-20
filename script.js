@@ -12,48 +12,65 @@ const teamData = {
             name: "Елисеев Павел",                 // имя участника
             photoUrl: "avatarsSite/pavel.jpg",     // Путь к файлу фото (если есть)
             photoInitials: "ПЕ",                   // Инициалы (если фото отсутствует)
-            contacts: "<img src='icons/telegram.jpg' style='width:16px;height:16px;vertical-align:middle;'> @polxrknight | 📱 +7 (922) 132-51-75 | 📧 eliseev.p25175@gmail.com",  // Контакты в HTML
+            contacts: "<img src='icons/telegram.jpg' style='width:16px;height:16px;vertical-align:middle;'> @polxrknight | 📱 +7 (922) 132-51-75 | 📧 eliseev.p25175@gmail.com",  // Контакты
             gallery: [  // Массив фото для галереи
-                "stories/pavel/random1.jpg",
-                "stories/pavel/random2.jpg",
-                "stories/pavel/random3.jpg",
-                "stories/pavel/random4.jpg"
+                "stories/pavel/gallery1.jpg",
+                "stories/pavel/gallery2.jpg",
+                "stories/pavel/gallery3.jpg",
+                "stories/pavel/gallery4.jpg",
+                "stories/pavel/gallery5.jpg",
+                "stories/pavel/gallery6.jpg",
+                "stories/pavel/gallery7.jpg",
+                "stories/pavel/gallery8.jpg",
+                "stories/pavel/gallery9.jpg",
+                "stories/pavel/gallery10.jpg",
+                "stories/pavel/gallery11.jpg",
+                "stories/pavel/gallery12.jpg",
+                "stories/pavel/gallery13.jpg",
+                "stories/pavel/gallery14.jpg",
+                "stories/pavel/gallery15.jpg",
+                "stories/pavel/gallery16.jpg"
             ],
             categories: {  // Категории контента (разделы на странице студента)
-                general: {  // Категория "О себе"
-                    title: "📖 О себе",  // Название с эмодзи
-                    media: [  // Массив медиа-файлов (фото и видео)
-                        { type: "image", url: "stories/pavel/general1.jpg" },  // Фото
-                        { type: "image", url: "stories/pavel/general2.jpg" },  // Фото
-                        { type: "video", url: "stories/pavel/general1.mp4" }    // Видео
-                    ]
-                },
-                study: {  // Категория "Учёба"
-                    title: "📚 Учёба",
+                general: { 
+                    title: "<-- Я -->", 
                     media: [
-                        { type: "image", url: "stories/pavel/study1.jpg" },
-                        { type: "video", url: "stories/pavel/study1.mp4" }
-                    ]
+                        { type: "image", url: "stories/pavel/me6.jpg" },
+                        { type: "image", url: "stories/pavel/me1.jpg" },
+                        { type: "image", url: "stories/pavel/me2.jpg" },
+                        { type: "image", url: "stories/pavel/me3.jpg" },
+                        { type: "image", url: "stories/pavel/me4.jpg" },
+                        { type: "image", url: "stories/pavel/me5.jpg" },
+                    ] 
                 },
-                sport: {  // Категория "Спорт"
-                    title: "⚽ Спорт",
+                study: { 
+                    title: "<- МатМех ->", 
+                    media: [
+                        { type: "image", url: "stories/pavel/matmeh1.jpg" },
+                        { type: "image", url: "stories/pavel/matmeh2.jpg" },
+                        { type: "image", url: "stories/pavel/matmeh3.jpg" }
+                    ] 
+                },
+                sport: { 
+                    title: "<- Спорт ->",
                     media: [
                         { type: "image", url: "stories/pavel/sport1.jpg" },
-                        { type: "image", url: "stories/pavel/sport2.jpg" }
-                    ]
+                        { type: "image", url: "stories/pavel/sport2.jpg" },
+                        { type: "video", url: "stories/pavel/sport3.MOV" }
+                    ] 
                 },
-                hobby: {  // Категория "Хобби"
-                    title: "🎨 Хобби",
+                hobby: { 
+                    title: "<- Хобби ->", 
                     media: [
                         { type: "image", url: "stories/pavel/hobby1.jpg" },
                         { type: "image", url: "stories/pavel/hobby2.jpg" },
-                        { type: "video", url: "stories/pavel/hobby1.mp4" },
+                        { type: "image", url: "stories/pavel/hobby3.jpg" }
                     ]
                 },
-                music: {  // Категория "Музыка" (содержит треки вместо медиа)
-                    title: "🎧 Музыка",
-                    tracks: [  // Массив аудиотреков
-                        { name: "Joey Valence & Brae - HOOLIGANG", url: "music/pavel/HOOLIGANG.mp3", cover: "covers/pavel/HOOLIGANG.jpg" },
+                music: {
+                    title: "< Плейлист >",
+                    tracks: [
+                        { name: "mightymason - champain", url: "music/pavel/champain.mp3", cover: "covers/pavel/champain.jpg" },
                         { name: "Scorpions - Rock You Like a Hurricane", url: "music/pavel/hurricane.mp3", cover: "covers/pavel/hurricane.jpg" },
                         { name: "Serge Devant, Hadley - Addicted", url: "music/pavel/Addicted.mp3", cover: "covers/pavel/Addicted.jpg" },
                         { name: "2hollis - two bad", url: "music/pavel/two_bad.mp3", cover: "covers/pavel/two_bad.jpg" },
@@ -68,19 +85,56 @@ const teamData = {
             name: "Комлев Кирилл",
             photoUrl: "avatarsSite/kirill.jpg",
             photoInitials: "КК",
-            contacts: "",
+            contacts: "<img src='icons/telegram.jpg' style='width:16px;height:16px;vertical-align:middle;'> @ripyoflxr | 📱 +7 (982) 718-24-17 | 📧 kir.kom07@mail.ru",
             gallery: [
-                "stories/kirill/random1.jpg",
-                "stories/kirill/random2.jpg",
-                "stories/kirill/random3.jpg"
+                "stories/kirill/gallery1.jpg",
+                "stories/kirill/gallery2.jpg",
+                "stories/kirill/gallery3.jpg",
+                "stories/kirill/gallery4.jpg",
+                "stories/kirill/gallery5.jpg",
+                "stories/kirill/gallery6.jpg",
+                "stories/kirill/gallery7.jpg",
+                "stories/kirill/gallery8.jpg",
+                "stories/kirill/gallery9.jpg",
+                "stories/kirill/gallery10.jpg"
             ],
             categories: {
-                general: { title: "📖 О себе", media: [] },  // Пустые массивы = нет контента
-                study: { title: "📚 Учёба", media: [] },
-                sport: { title: "⚽ Спорт", media: [] },
-                hobby: { title: "🎨 Хобби", media: [] },
+                general: { 
+                    title: "<-- Я -->", 
+                    media: [
+                        { type: "image", url: "stories/kirill/me1.jpg" },
+                        { type: "image", url: "stories/kirill/me2.jpg" },
+                        { type: "image", url: "stories/kirill/me3.jpg" },
+                        { type: "image", url: "stories/kirill/me4.jpg" }
+                    ] 
+                },
+                study: { 
+                    title: "<- МатМех ->", 
+                    media: [
+                        { type: "image", url: "stories/kirill/matmeh1.jpg" },
+                        { type: "image", url: "stories/kirill/matmeh2.jpg" },
+                        { type: "image", url: "stories/kirill/matmeh3.jpg" }
+                    ] 
+                },
+                sport: { 
+                    title: "<- Спорт ->",
+                    media: [
+                        { type: "image", url: "stories/kirill/sport1.jpg" },
+                        { type: "image", url: "stories/kirill/sport2.jpg" },
+                        { type: "image", url: "stories/kirill/sport3.jpg" }
+                    ] 
+                },
+                hobby: { 
+                    title: "<- Хобби ->", 
+                    media: [
+                        { type: "image", url: "stories/kirill/hobby1.jpg" },
+                        { type: "image", url: "stories/kirill/hobby2.jpg" },
+                        { type: "image", url: "stories/kirill/hobby3.jpg" },
+                        { type: "image", url: "stories/kirill/hobby4.jpg" }
+                    ] 
+                },
                 music: {
-                    title: "🎧 Музыка",
+                    title: "< Плейлист >",
                     tracks: [
                         { name: "bleood - mikU", url: "music/kirill/miku.mp3", cover: "covers/kirill/miku.jpg" },
                         { name: "Yuke - Anxious", url: "music/kirill/anxious.mp3", cover: "covers/kirill/anxious.jpg" },
@@ -97,18 +151,58 @@ const teamData = {
             name: "Байтуллин Илья",
             photoUrl: "avatarsSite/ilya.jpg",
             photoInitials: "ИБ",
-            contacts: "",
+            contacts: "<img src='icons/telegram.jpg' style='width:16px;height:16px;vertical-align:middle;'> @Ilia_Ba | 📱 +7 (912) 250-71-71 | 📧 ilia.baitullin@gmail.com",
             gallery: [
-                "stories/ilya/random1.jpg",
-                "stories/ilya/random2.jpg"
+                "stories/ilya/gallery1.jpg",
+                "stories/ilya/gallery2.jpg",
+                "stories/ilya/gallery3.jpg",
+                "stories/ilya/gallery4.jpg",
+                "stories/ilya/gallery5.jpg",
+                "stories/ilya/gallery6.jpg",
+                "stories/ilya/gallery7.jpg",
+                "stories/ilya/gallery8.jpg",
+                "stories/ilya/gallery9.jpg",
+                "stories/ilya/gallery10.jpg",
+                "stories/ilya/gallery11.jpg",
+                "stories/ilya/gallery12.jpg",
+                "stories/ilya/gallery13.jpg"
             ],
             categories: {
-                general: { title: "📖 О себе", media: [] },
-                study: { title: "📚 Учёба", media: [] },
-                sport: { title: "⚽ Спорт", media: [] },
-                hobby: { title: "🎨 Хобби", media: [] },
+                general: { 
+                    title: "<-- Я -->", 
+                    media: [
+                        { type: "image", url: "stories/ilya/me1.jpg" },
+                        { type: "image", url: "stories/ilya/me2.jpg" },
+                        { type: "image", url: "stories/ilya/me3.jpg" }
+                    ] 
+                },
+                study: { 
+                    title: "<- МатМех ->", 
+                    media: [
+                        { type: "image", url: "stories/ilya/matmeh1.jpg" },
+                        { type: "image", url: "stories/ilya/matmeh2.jpg" },
+                        { type: "image", url: "stories/ilya/matmeh3.jpg" },
+                        { type: "image", url: "stories/ilya/matmeh4.jpg" }
+                    ] 
+                },
+                sport: { 
+                    title: "<- Спорт ->",
+                    media: [
+                        { type: "image", url: "stories/ilya/sport1.jpg" },
+                        { type: "image", url: "stories/ilya/sport2.jpg" },
+                        { type: "image", url: "stories/ilya/sport3.jpg" }
+                    ] 
+                },
+                hobby: { 
+                    title: "<- Хобби ->", 
+                    media: [
+                        { type: "image", url: "stories/ilya/hobby1.jpg" },
+                        { type: "image", url: "stories/ilya/hobby2.jpg" },
+                        { type: "image", url: "stories/ilya/hobby3.jpg" }
+                    ] 
+                },
                 music: {
-                    title: "🎧 Музыка",
+                    title: "< Плейлист >",
                     tracks: [
                         { name: "FRENDLY THUG 52 NGG - 2 Goyard", url: "music/ilya/2_Goyard.mp3", cover: "covers/ilya/2_Goyard.jpg" },
                         { name: "BUSHIDO ZHO - Heaven", url: "music/ilya/Heaven.mp3", cover: "covers/ilya/Heaven.jpg" },
@@ -125,28 +219,51 @@ const teamData = {
             name: "Ковкова Полина",
             photoUrl: "avatarsSite/polina.jpg",
             photoInitials: "ПК",
-            contacts: "",
+            contacts: "<img src='icons/telegram.jpg' style='width:16px;height:16px;vertical-align:middle;'> @ssavoy | 📱 +7 (953) 058-41-26 | 📧 2007pk@mail.ru",
             gallery: [
-                "stories/polina/random1.jpg",
-                "stories/polina/random2.jpg",
-                "stories/polina/random3.jpg"
+                "stories/polina/gallery1.jpg",
+                "stories/polina/gallery2.jpg",
+                "stories/polina/gallery3.jpg",
+                "stories/polina/gallery4.jpg",
+                "stories/polina/gallery5.jpg"
             ],
             categories: {
-                general: { title: "📖 О себе", media: [] },
-                study: { title: "📚 Учёба", media: [] },
-                sport: { title: "⚽ Спорт", media: [] },
-                hobby: { 
-                    title: "🎨 Хобби",
+                general: { 
+                    title: "<-- Я -->", 
                     media: [
-                        { type: "video", url: "stories/polina/hobby1.mp4" },
+                        { type: "video", url: "stories/polina/me1.MP4" },
+                        { type: "video", url: "stories/polina/me2.MP4" }
+                    ] 
+                },
+                study: { 
+                    title: "<- МатМех ->", 
+                    media: [
+                        { type: "image", url: "stories/polina/matmeh1.jpg" },
+                        { type: "image", url: "stories/polina/matmeh2.jpg" },
+                        { type: "image", url: "stories/polina/matmeh3.jpg" },
+                        { type: "image", url: "stories/polina/matmeh4.jpg" },
+                        { type: "image", url: "stories/polina/matmeh5.jpg" },
+                        { type: "image", url: "stories/polina/matmeh6.jpg" },
+                        { type: "image", url: "stories/polina/matmeh7.jpg" },
+                        { type: "video", url: "stories/polina/matmeh8.MP4" }
+                    ] 
+                },
+                sport: { 
+                    title: "<- Спорт ->",
+                    media: [
+                        { type: "video", url: "stories/polina/sport1.MOV" }
+                    ] 
+                },
+                hobby: { 
+                    title: "<- Хобби ->", 
+                    media: [
                         { type: "image", url: "stories/polina/hobby1.jpg" },
-                        { type: "video", url: "stories/polina/hobby2.mp4" },
                         { type: "image", url: "stories/polina/hobby2.jpg" },
                         { type: "image", url: "stories/polina/hobby3.jpg" }
-                    ]
+                    ] 
                 },
                 music: {
-                    title: "🎧 Музыка",
+                    title: "< Плейлист >",
                     tracks: [
                         { name: "Cherish, Nephu - He Said, She Said", url: "music/polina/hsss.mp3", cover: "covers/polina/hsss.jpg" },
                         { name: "GBAN, MAYOT - Мегаполис", url: "music/polina/megapolis.mp3", cover: "covers/polina/megapolis.jpg" },
@@ -163,26 +280,49 @@ const teamData = {
             name: "Грибовская Ксения",
             photoUrl: "avatarsSite/kseniya.jpg",
             photoInitials: "КГ",
-            contacts: "",
+            contacts: "<img src='icons/telegram.jpg' style='width:16px;height:16px;vertical-align:middle;'> @QUW3Y | 📱 +7 (912) 281-49-05 | 📧 ksusha310107@gmail.com",
             gallery: [
                 "stories/kseniya/gallery1.jpg",
-                "stories/kseniya/gallery2.jpg"           
+                "stories/kseniya/gallery2.jpg",
+                "stories/kseniya/gallery3.jpg",
+                "stories/kseniya/gallery4.jpg",
+                "stories/kseniya/gallery5.jpg",
+                "stories/kseniya/gallery6.jpg",
             ],
             categories: {
                 general: { 
-                    title: "📖 О себе", 
+                    title: "<-- Я -->", 
                     media: [
-                        { type: "video", url: "stories/kseniya/hobby2.mp4" },
-                        { type: "image", url: "stories/kseniya/hobby1.jpg" },
-                        { type: "video", url: "stories/kseniya/hobby1.mp4" },
-                        { type: "image", url: "stories/kseniya/hobby2.jpg" }
+                        { type: "image", url: "stories/kseniya/me1.jpg" },
+                        { type: "image", url: "stories/kseniya/me2.jpg" },
+                        { type: "image", url: "stories/kseniya/me3.jpg" },
+                        { type: "video", url: "stories/kseniya/me4.MOV" }
                     ] 
                 },
-                study: { title: "📚 Учёба", media: [] },
-                sport: { title: "⚽ Спорт", media: [] },
-                hobby: { title: "🎨 Хобби", media: [] },
+                study: { 
+                    title: "<- МатМех ->", 
+                    media: [
+                        { type: "image", url: "stories/kseniya/matmeh1.jpg" },
+                        { type: "video", url: "stories/kseniya/matmeh2.MOV" },
+                        { type: "image", url: "stories/kseniya/matmeh3.jpg" }
+                    ] 
+                },
+                sport: { 
+                    title: "<- Спорт ->",
+                    media: [
+                        { type: "image", url: "stories/kseniya/sport1.jpg" }
+                    ] 
+                },
+                hobby: { 
+                    title: "<- Хобби ->", 
+                    media: [
+                        { type: "image", url: "stories/kseniya/hobby1.jpg" },
+                        { type: "image", url: "stories/kseniya/hobby2.jpg" },
+                        { type: "image", url: "stories/kseniya/hobby3.jpg" }
+                    ] 
+                },
                 music: {
-                    title: "🎧 Музыка",
+                    title: "< Плейлист >",
                     tracks: [
                         { name: "Kai Angel - Limousine Music", url: "music/kseniya/Limousine_Music.mp3", cover: "covers/kseniya/Limousine_Music.jpg" },
                         { name: "Heronwater - ВЕЧНО МОЛОДОЙ", url: "music/kseniya/VECHNO_MOLODOY.mp3", cover: "covers/kseniya/VECHNO_MOLODOY.jpg" },
@@ -355,7 +495,7 @@ function loadFullState() {
 // ВОССТАНОВЛЕНИЕ ПЛЕЙЛИСТА ПОСЛЕ ОБНОВЛЕНИЯ
 // ============================================================================
 
-// Специальная функция для восстановления открытого плейлиста после перезагрузки
+// функция для восстановления открытого плейлиста после перезагрузки
 function restorePlaylistModal(tracks, studentName) {
     if (!tracks || tracks.length === 0) return;  // Если нет треков - выходим
     
@@ -364,7 +504,7 @@ function restorePlaylistModal(tracks, studentName) {
     
     // Создаём модальное окно
     const modal = document.createElement('div');
-    modal.className = 'playlist-modal';  // CSS-класс для стилизации
+    modal.className = 'playlist-modal';
     modal.style.cssText = `
         position: fixed;
         top: 0;
@@ -429,17 +569,21 @@ function restorePlaylistModal(tracks, studentName) {
                         ${(isSamePlaylist && index === currentTrackIndexGlobal) ? `
                             <div class="playing-icon" style="width: 20px; height: 20px;">
                                 <svg viewBox="0 0 24 24" width="20" height="20">
-                                    <path d="M8 5v14l11-7z" fill="#40e0d0"/>
+                                    ${globalAudio && !globalAudio.paused ? 
+                                        '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="#40e0d0"/>' : 
+                                        '<path d="M8 5v14l11-7z" fill="#40e0d0"/>'
+                                    }
                                 </svg>
                             </div>
                         ` : ''}
                     </div>
                 `).join('')}  
             </div>
+            <div class="other-playlist-msg" style="margin-top: 1rem; padding: 0.75rem; background: rgba(64,224,208,0.2); border-radius: 1rem; text-align: center; color: #40e0d0; font-size: 0.85rem; ${(!isSamePlaylist && globalAudio && !globalAudio.paused && currentTrackListGlobal.length) ? '' : 'display: none;'}">
+                🎵 Сейчас играет трек из другого плейлиста
+            </div>
         </div>
     `;
-                  //  ^
-            // Объединяем все треки в одну строку
 
     document.body.appendChild(modal);  // Добавляем модальное окно на страницу
     
@@ -481,11 +625,20 @@ function restorePlaylistModal(tracks, studentName) {
             if (isNaN(index)) return;  // Если не число - выходим
             
             if (isSamePlaylist && index === currentTrackIndexGlobal) {
-                // Если кликнули на ТЕКУЩИЙ трек - переключаем паузу/воспроизведение
+                // Если кликнули на ТЕКУЩИЙ трек - переключаем паузу/воспроизведение (НЕ перезапускаем)
                 if (globalAudio.paused) {
                     globalAudio.play().catch(e => console.log(e));  // Воспроизводим
                 } else {
                     globalAudio.pause();  // Ставим на паузу
+                }
+                // Обновляем иконку в плейлисте
+                const iconDiv = el.querySelector('.playing-icon svg');
+                if (iconDiv) {
+                    if (globalAudio.paused) {
+                        iconDiv.innerHTML = '<path d="M8 5v14l11-7z" fill="#40e0d0"/>';
+                    } else {
+                        iconDiv.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="#40e0d0"/>';
+                    }
                 }
             } else {
                 // Если кликнули на ДРУГОЙ трек - переключаем на него
@@ -528,6 +681,8 @@ function restorePlaylistModal(tracks, studentName) {
         };
     });
 }
+
+
 
 // ============================================================================
 // ИНИЦИАЛИЗАЦИЯ ПЛЕЕРА (НАСТРОЙКА СОБЫТИЙ)
@@ -866,6 +1021,171 @@ function ensureMiniPlayerVisible() {
 window.currentPlaylistTracks = null;  // Глобальная переменная для хранения текущего открытого плейлиста
 
 // Открывает модальное окно с плейлистом (при клике на иконку музыки)
+// function openPlaylistModal(tracks, studentName) {
+//     if (!tracks || tracks.length === 0) return;  // Нет треков - выходим
+    
+//     window.currentPlaylistTracks = tracks;  // Запоминаем открытый плейлист
+//     const isSamePlaylist = arePlaylistsEqual(currentTrackListGlobal, tracks);  // Тот же ли плейлист?
+    
+//     // Создаём модальное окно
+//     const modal = document.createElement('div');
+//     modal.className = 'playlist-modal';
+//     modal.style.cssText = `
+//         position: fixed;
+//         top: 0;
+//         left: 0;
+//         width: 100%;
+//         height: 100%;
+//         background: rgba(0,0,0,0.8);
+//         backdrop-filter: blur(10px);
+//         z-index: 10001;
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//     `;
+    
+//     // Генерируем HTML-содержимое
+//     modal.innerHTML = `
+//         <div style="
+//             width: 90%;
+//             max-width: 500px;
+//             max-height: 80vh;
+//             background: linear-gradient(135deg, #1e1e3a, #15152a);
+//             border-radius: 2rem;
+//             padding: 1.5rem;
+//             border: 1px solid rgba(64,224,208,0.4);
+//             overflow-y: auto;
+//         ">
+//             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+//                 <h3 style="color: white; margin: 0;">🎵 Плейлист ${escapeHtml(studentName)}</h3>
+//                 <button id="closePlaylistBtn" style="
+//                     background: rgba(64,224,208,0.2);
+//                     border: none;
+//                     color: white;
+//                     font-size: 24px;
+//                     width: 40px;
+//                     height: 40px;
+//                     border-radius: 50%;
+//                     cursor: pointer;
+//                 ">✕</button>
+//             </div>
+//             <div id="trackList">
+//                 ${tracks.map((track, index) => `
+//                     <div class="playlist-track" data-track-index="${index}" style="
+//                         display: flex;
+//                         align-items: center;
+//                         gap: 1rem;
+//                         padding: 0.75rem;
+//                         background: ${(isSamePlaylist && index === currentTrackIndexGlobal) ? 
+//                             (globalAudio && !globalAudio.paused ? 'rgba(64,224,208,0.25)' : 'rgba(64,224,208,0.2)') : 
+//                             'rgba(255,255,255,0.05)'};
+//                         border-radius: 1rem;
+//                         cursor: pointer;
+//                         margin-bottom: 0.5rem;
+//                         ${(isSamePlaylist && index === currentTrackIndexGlobal) ? 'border-left: 3px solid #40e0d0;' : ''}
+//                     ">
+//                         <div style="width: 50px; height: 50px; border-radius: 0.5rem; overflow: hidden;">
+//                             <img src="${track.cover}" style="width: 100%; height: 100%; object-fit: cover;">
+//                         </div>
+//                         <div style="flex: 1;">
+//                             <div style="color: white; font-weight: 500;">${escapeHtml(getTrackName(track.name))}</div>
+//                             <div style="color: #8b9dc3; font-size: 0.85rem;">${escapeHtml(getArtistName(track.name))}</div>
+//                         </div>
+//                         ${(isSamePlaylist && index === currentTrackIndexGlobal) ? `
+//                             <div class="playing-icon" style="width: 20px; height: 20px;">
+//                                 <svg viewBox="0 0 24 24" width="20" height="20">
+//                                     <path d="M8 5v14l11-7z" fill="#40e0d0"/>
+//                                 </svg>
+//                             </div>
+//                         ` : ''}
+//                     </div>
+//                 `).join('')}
+//             </div>
+//             <div class="other-playlist-msg" style="margin-top: 1rem; padding: 0.75rem; background: rgba(64,224,208,0.2); border-radius: 1rem; text-align: center; color: #40e0d0; font-size: 0.85rem; ${(!isSamePlaylist && globalAudio && !globalAudio.paused && currentTrackListGlobal.length) ? '' : 'display: none;'}">
+//                 🎵 Сейчас играет трек из другого плейлиста
+//             </div>
+//         </div>
+//     `;
+    
+//     document.body.appendChild(modal);  // Добавляем на страницу
+    
+//     // Обработчик закрытия по кнопке
+//     document.getElementById('closePlaylistBtn').onclick = () => {
+//         modal.remove();
+//         window.currentPlaylistTracks = null;
+//         saveFullState();
+//     };
+    
+//     // Обработчик закрытия по клику на фон
+//     modal.onclick = (e) => {
+//         if (e.target === modal) {
+//             modal.remove();
+//             window.currentPlaylistTracks = null;
+//             saveFullState();
+//         }
+//     };
+    
+//     // Обработчики клика по трекам
+//     document.querySelectorAll('.playlist-track').forEach(el => {
+//         el.onclick = (e) => {
+//             e.stopPropagation();
+//             const index = parseInt(el.getAttribute('data-track-index'));
+//             if (isNaN(index)) return;
+            
+//             if (isSamePlaylist && index === currentTrackIndexGlobal) {
+//                 // Тот же трек - пауза/плей
+//                 if (globalAudio.paused) {
+//                     globalAudio.play().catch(e => console.log(e));
+//                 } else {
+//                     globalAudio.pause();
+//                 }
+//             } else {
+//                 // Новый трек - переключаем
+//                 currentTrackListGlobal = tracks;
+//                 currentTrackIndexGlobal = index;
+//                 globalAudio.src = tracks[index].url;
+//                 globalAudio.play().catch(e => console.log(e));
+//                 updateAllPlayerDisplays();
+//                 updatePlayButtons();
+//                 updateMiniProgress();
+                
+//                 // Обновляем подсветку всех треков
+//                 document.querySelectorAll('.playlist-track').forEach((track, i) => {
+//                     const icon = track.querySelector('.playing-icon');
+//                     if (icon) icon.remove();
+//                     track.style.background = 'rgba(255,255,255,0.05)';
+//                     track.style.borderLeft = '';
+//                     track.classList.remove('active', 'playing');
+                    
+//                     if (i === index) {
+//                         track.style.background = 'rgba(64,224,208,0.25)';
+//                         track.style.borderLeft = '3px solid #40e0d0';
+//                         track.classList.add('playing');
+//                         const newIcon = document.createElement('div');
+//                         newIcon.className = 'playing-icon';
+//                         newIcon.style.cssText = 'width:20px;height:20px;margin-left:auto;';
+//                         newIcon.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#40e0d0"/></svg>';
+//                         track.appendChild(newIcon);
+//                     }
+//                 });
+                
+//                 // СКРЫВАЕМ СООБЩЕНИЕ "трек из другого плейлиста", потому что теперь трек из ЭТОГО плейлиста
+//                 const otherPlaylistMsg = modal.querySelector('.other-playlist-msg');
+//                 if (otherPlaylistMsg) {
+//                     otherPlaylistMsg.style.display = 'none';
+//                 }
+//             }
+//             saveFullState();
+//         };
+//     });
+
+//     updatePlaylistHighlight(); // Обновляем подсветку после переключения
+//     saveFullState();  // Сохраняем состояние
+// }
+
+
+
+// Открывает модальное окно с плейлистом (при клике на иконку музыки)
 function openPlaylistModal(tracks, studentName) {
     if (!tracks || tracks.length === 0) return;  // Нет треков - выходим
     
@@ -939,7 +1259,10 @@ function openPlaylistModal(tracks, studentName) {
                         ${(isSamePlaylist && index === currentTrackIndexGlobal) ? `
                             <div class="playing-icon" style="width: 20px; height: 20px;">
                                 <svg viewBox="0 0 24 24" width="20" height="20">
-                                    <path d="M8 5v14l11-7z" fill="#40e0d0"/>
+                                    ${globalAudio && !globalAudio.paused ? 
+                                        '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="#40e0d0"/>' : 
+                                        '<path d="M8 5v14l11-7z" fill="#40e0d0"/>'
+                                    }
                                 </svg>
                             </div>
                         ` : ''}
@@ -978,11 +1301,20 @@ function openPlaylistModal(tracks, studentName) {
             if (isNaN(index)) return;
             
             if (isSamePlaylist && index === currentTrackIndexGlobal) {
-                // Тот же трек - пауза/плей
+                // Тот же трек - переключаем паузу/плей (НЕ перезапускаем)
                 if (globalAudio.paused) {
                     globalAudio.play().catch(e => console.log(e));
                 } else {
                     globalAudio.pause();
+                }
+                // Обновляем иконку в плейлисте
+                const iconDiv = el.querySelector('.playing-icon svg');
+                if (iconDiv) {
+                    if (globalAudio.paused) {
+                        iconDiv.innerHTML = '<path d="M8 5v14l11-7z" fill="#40e0d0"/>';
+                    } else {
+                        iconDiv.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="#40e0d0"/>';
+                    }
                 }
             } else {
                 // Новый трек - переключаем
@@ -1027,6 +1359,10 @@ function openPlaylistModal(tracks, studentName) {
     updatePlaylistHighlight(); // Обновляем подсветку после переключения
     saveFullState();  // Сохраняем состояние
 }
+
+
+
+
 
 // ============================================================================
 // МЕДИА-ПРОСМОТРЩИК (ФОТО И ВИДЕО)
@@ -1387,10 +1723,25 @@ function renderStudentPage() {
                     const hasContent = key === 'music' ? 
                         (cat.tracks && cat.tracks.length > 0) : 
                         (cat.media && cat.media.length > 0);
+                    
+                    // Получаем первый медиафайл из категории (если есть)
+                    let categoryPreview = '';
+                    if (key !== 'music' && cat.media && cat.media.length > 0) {
+                        const firstMedia = cat.media[0];
+                        if (firstMedia.type === 'image') {
+                            categoryPreview = `<img src="${firstMedia.url}" class="category-preview-img">`;
+                        } else if (firstMedia.type === 'video') {
+                            // Для видео используем первый кадр через тег video с автозагрузкой метаданных
+                            categoryPreview = `<video src="${firstMedia.url}" class="category-preview-video" muted preload="metadata" poster=""></video>`;
+                        }
+                    }
+                    
                     return `
                         <div class="category-circle" data-category="${key}" ${!hasContent ? 'style="opacity:0.5;"' : ''}>
                             <div class="category-circle-ring">
-                                <div class="category-circle-inner">${icons[key]}</div>
+                                <div class="category-circle-inner">
+                                    ${categoryPreview || icons[key]}
+                                </div>
                             </div>
                             <span class="category-circle-title">${cat.title}</span>
                         </div>
