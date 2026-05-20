@@ -761,18 +761,38 @@ function updateAllPlayerDisplays() {
     if (miniArtist) miniArtist.textContent = getArtistName(track.name); // Устанавливаем исполнителя
 }
 
+
 // Обновляет прогресс-бар в мини-плеере
 function updateMiniProgress() {
     const miniProgressFill = document.querySelector('.mini-player-progress-fill');
     const miniProgressThumb = document.querySelector('.mini-player-progress-thumb');
+    const currentTimeSpan = document.getElementById('miniPlayerCurrentTime');
+    const durationSpan = document.getElementById('miniPlayerDuration');
     
-    if (miniProgressFill && globalAudio && globalAudio.duration && globalAudio.duration > 0) {
+    if (globalAudio && globalAudio.duration && globalAudio.duration > 0 && !isNaN(globalAudio.duration)) {
         // Вычисляем процент прошедшего времени
         const percent = (globalAudio.currentTime / globalAudio.duration) * 100;
-        miniProgressFill.style.width = percent + '%';          // Устанавливаем ширину заливки
-        if (miniProgressThumb) miniProgressThumb.style.left = percent + '%';  // Перемещаем ползунок
+        if (miniProgressFill) miniProgressFill.style.width = percent + '%';
+        if (miniProgressThumb) miniProgressThumb.style.left = percent + '%';
+        
+        // Обновляем время
+        if (currentTimeSpan) {
+            const currentMinutes = Math.floor(globalAudio.currentTime / 60);
+            const currentSeconds = Math.floor(globalAudio.currentTime % 60);
+            currentTimeSpan.textContent = `${currentMinutes}:${currentSeconds.toString().padStart(2, '0')}`;
+        }
+        
+        if (durationSpan) {
+            const durationMinutes = Math.floor(globalAudio.duration / 60);
+            const durationSeconds = Math.floor(globalAudio.duration % 60);
+            durationSpan.textContent = `${durationMinutes}:${durationSeconds.toString().padStart(2, '0')}`;
+        }
+    } else {
+        if (currentTimeSpan) currentTimeSpan.textContent = '0:00';
+        if (durationSpan) durationSpan.textContent = '0:00';
     }
 }
+
 
 // Обновляет кнопку Play/Pause в мини-плеере (меняет иконку)
 function updatePlayButtons() {
@@ -839,10 +859,6 @@ function updatePlaylistHighlight() {
     });
 }
 
-
-
-
-// Переключает на указанный трек
 // Переключает на указанный трек
 function switchTrack(newIndex, keepPlaying) {
     if (!currentTrackListGlobal.length) return;
@@ -879,22 +895,32 @@ function createMiniPlayerElement() {
     const miniPlayer = document.createElement('div');
     miniPlayer.className = 'mini-player';  // CSS-класс для стилизации
     
-    // HTML-структура мини-плеера
+    // HTML-структура мини-плеера с новым расположением
     miniPlayer.innerHTML = `
-        <div class="mini-player-progress-container">
-            <div class="mini-player-progress-bar">
-                <div class="mini-player-progress-fill"></div>
-                <div class="mini-player-progress-thumb"></div>
+        <div class="mini-player-left">
+            <div class="mini-player-cover">
+                <img id="miniPlayerCover" src="" alt="Обложка">
+            </div>
+            <div class="mini-player-info">
+                <div class="mini-player-title" id="miniPlayerTitle">-</div>
+                <div class="mini-player-artist" id="miniPlayerArtist">-</div>
             </div>
         </div>
-        <div class="mini-player-cover">
-            <img id="miniPlayerCover" src="" alt="Обложка">
+        
+        <div class="mini-player-center">
+            <div class="mini-player-progress-container">
+                <div class="mini-player-progress-bar">
+                    <div class="mini-player-progress-fill"></div>
+                    <div class="mini-player-progress-thumb"></div>
+                </div>
+            </div>
+            <div class="mini-player-time">
+                <span id="miniPlayerCurrentTime">0:00</span>
+                <span id="miniPlayerDuration">0:00</span>
+            </div>
         </div>
-        <div class="mini-player-info">
-            <div class="mini-player-title" id="miniPlayerTitle">-</div>
-            <div class="mini-player-artist" id="miniPlayerArtist">-</div>
-        </div>
-        <div class="mini-player-controls">
+        
+        <div class="mini-player-right">
             <button class="mini-player-btn" id="miniPlayerPrev">
                 <svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" fill="#cbd5e1"/></svg>
             </button>
@@ -904,8 +930,8 @@ function createMiniPlayerElement() {
             <button class="mini-player-btn" id="miniPlayerNext">
                 <svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" fill="#cbd5e1"/></svg>
             </button>
+            <button class="mini-player-close" id="miniPlayerClose">✕</button>
         </div>
-        <button class="mini-player-close" id="miniPlayerClose">✕</button>
     `;
     
     document.body.appendChild(miniPlayer);  // Добавляем в DOM
@@ -915,31 +941,165 @@ function createMiniPlayerElement() {
 
 // Навешивает обработчики событий на элементы мини-плеера
 function attachMiniPlayerEvents() {
-    // Обработчик клика по прогресс-бару (перемотка)
     const container = document.querySelector('.mini-player-progress-container');
+    const progressBar = document.querySelector('.mini-player-progress-bar');
+    const thumb = document.querySelector('.mini-player-progress-thumb');
+    let isDragging = false;
+    
+    // Создаём невидимую расширенную зону для перетаскивания
+    let hitArea = null;
+    
     if (container) {
-        container.onclick = (e) => {
-            if (!globalAudio || !globalAudio.duration) return;  // Нет аудио или длительности
-            const rect = container.getBoundingClientRect();     // Получаем координаты элемента
-            // Вычисляем процент клика относительно ширины
-            const percent = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-            globalAudio.currentTime = percent * globalAudio.duration;  // Устанавливаем время
-            saveFullState();  // Сохраняем состояние
+        // Создаём расширенную зону (на 20px выше и ниже)
+        hitArea = document.createElement('div');
+        hitArea.style.cssText = `
+            position: absolute;
+            left: 0;
+            top: -20px;
+            width: 100%;
+            height: calc(100% + 40px);
+            cursor: pointer;
+            z-index: 5;
+        `;
+        container.style.position = 'relative';
+        container.appendChild(hitArea);
+    }
+    
+    // Функция перемотки по координатам
+    const seek = (clientX, updateOnlyVisual = false) => {
+        if (!globalAudio || !globalAudio.duration) return;
+        if (!container) return;
+        
+        const rect = container.getBoundingClientRect();
+        let percent = (clientX - rect.left) / rect.width;
+        percent = Math.max(0, Math.min(1, percent));
+        
+        // Визуально обновляем ползунок и прогресс
+        const fill = document.querySelector('.mini-player-progress-fill');
+        if (fill) fill.style.width = percent * 100 + '%';
+        if (thumb) thumb.style.left = percent * 100 + '%';
+        
+        // Обновляем текущее время при перетаскивании
+        const newTime = percent * globalAudio.duration;
+        const currentTimeSpan = document.getElementById('miniPlayerCurrentTime');
+        if (currentTimeSpan && !updateOnlyVisual) {
+            const minutes = Math.floor(newTime / 60);
+            const seconds = Math.floor(newTime % 60);
+            currentTimeSpan.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        // Устанавливаем время воспроизведения (только если не визуальное обновление)
+        if (!updateOnlyVisual) {
+            globalAudio.currentTime = newTime;
+            saveFullState();
+        }
+    };
+    
+    // Обновление времени при перетаскивании (только визуально, без установки currentTime)
+    const updateVisualTime = (clientX) => {
+        if (!globalAudio || !globalAudio.duration) return;
+        if (!container) return;
+        
+        const rect = container.getBoundingClientRect();
+        let percent = (clientX - rect.left) / rect.width;
+        percent = Math.max(0, Math.min(1, percent));
+        
+        const newTime = percent * globalAudio.duration;
+        const currentTimeSpan = document.getElementById('miniPlayerCurrentTime');
+        if (currentTimeSpan) {
+            const minutes = Math.floor(newTime / 60);
+            const seconds = Math.floor(newTime % 60);
+            currentTimeSpan.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+    };
+    
+    // Функция для получения координат из события
+    const getClientX = (e) => {
+        if (e.touches) {
+            return e.touches[0].clientX;
+        }
+        return e.clientX;
+    };
+    
+    // Для десктопа - клик по контейнеру или расширенной зоне
+    const handleClick = (e) => {
+        e.stopPropagation();
+        seek(getClientX(e), false);
+    };
+    
+    if (container) {
+        container.onclick = handleClick;
+        if (hitArea) hitArea.onclick = handleClick;
+        
+        // Для мобильных устройств - touchstart
+        const handleTouchStart = (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            seek(getClientX(e), false);
         };
+        
+        container.ontouchstart = handleTouchStart;
+        if (hitArea) hitArea.ontouchstart = handleTouchStart;
+    }
+    
+    // Универсальная функция начала перетаскивания
+    const startDrag = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        isDragging = true;
+        seek(getClientX(e), false);
+        
+        const onMove = (moveEvent) => {
+            if (isDragging) {
+                moveEvent.preventDefault();
+                seek(getClientX(moveEvent), false);
+            }
+        };
+        
+        const onEnd = () => {
+            isDragging = false;
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('mouseup', onEnd);
+            document.removeEventListener('touchmove', onMove);
+            document.removeEventListener('touchend', onEnd);
+        };
+        
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onEnd);
+        document.addEventListener('touchmove', onMove);
+        document.addEventListener('touchend', onEnd);
+    };
+    
+    // Навешиваем обработчики на ползунок
+    if (thumb) {
+        thumb.onmousedown = startDrag;
+        thumb.ontouchstart = startDrag;
+    }
+    
+    // Навешиваем обработчики на прогресс-бар
+    if (progressBar) {
+        progressBar.onmousedown = startDrag;
+        progressBar.ontouchstart = startDrag;
+    }
+    
+    // Навешиваем обработчики на расширенную зону
+    if (hitArea) {
+        hitArea.onmousedown = startDrag;
+        hitArea.ontouchstart = startDrag;
     }
     
     // Обработчик кнопки Play/Pause
     const playBtn = document.getElementById('miniPlayerPlay');
     if (playBtn) {
         playBtn.onclick = (e) => {
-            e.stopPropagation();  // Останавливаем всплытие события
+            e.stopPropagation();
             if (!globalAudio) return;
             if (globalAudio.paused) {
                 if (currentTrackListGlobal.length) {
-                    globalAudio.play().catch(err => console.log(err));  // Воспроизводим
+                    globalAudio.play().catch(err => console.log(err));
                 }
             } else {
-                globalAudio.pause();  // Ставим на паузу
+                globalAudio.pause();
             }
             saveFullState();
         };
@@ -951,9 +1111,8 @@ function attachMiniPlayerEvents() {
         prevBtn.onclick = (e) => {
             e.stopPropagation();
             if (currentTrackListGlobal.length) {
-                // Вычисляем индекс предыдущего трека (с зацикливанием)
                 const newIndex = (currentTrackIndexGlobal - 1 + currentTrackListGlobal.length) % currentTrackListGlobal.length;
-                switchTrack(newIndex, true);  // true = продолжать воспроизведение
+                switchTrack(newIndex, true);
             }
         };
     }
@@ -964,7 +1123,6 @@ function attachMiniPlayerEvents() {
         nextBtn.onclick = (e) => {
             e.stopPropagation();
             if (currentTrackListGlobal.length) {
-                // Вычисляем индекс следующего трека (с зацикливанием)
                 const newIndex = (currentTrackIndexGlobal + 1) % currentTrackListGlobal.length;
                 switchTrack(newIndex, true);
             }
@@ -976,10 +1134,12 @@ function attachMiniPlayerEvents() {
     if (closeBtn) {
         closeBtn.onclick = (e) => {
             e.stopPropagation();
-            closeMiniPlayer();  // Закрываем плеер
+            closeMiniPlayer();
         };
     }
 }
+
+
 
 // Закрывает мини-плеер и полностью очищает состояние
 function closeMiniPlayer() {
@@ -1019,171 +1179,6 @@ function ensureMiniPlayerVisible() {
 // ============================================================================
 
 window.currentPlaylistTracks = null;  // Глобальная переменная для хранения текущего открытого плейлиста
-
-// Открывает модальное окно с плейлистом (при клике на иконку музыки)
-// function openPlaylistModal(tracks, studentName) {
-//     if (!tracks || tracks.length === 0) return;  // Нет треков - выходим
-    
-//     window.currentPlaylistTracks = tracks;  // Запоминаем открытый плейлист
-//     const isSamePlaylist = arePlaylistsEqual(currentTrackListGlobal, tracks);  // Тот же ли плейлист?
-    
-//     // Создаём модальное окно
-//     const modal = document.createElement('div');
-//     modal.className = 'playlist-modal';
-//     modal.style.cssText = `
-//         position: fixed;
-//         top: 0;
-//         left: 0;
-//         width: 100%;
-//         height: 100%;
-//         background: rgba(0,0,0,0.8);
-//         backdrop-filter: blur(10px);
-//         z-index: 10001;
-//         display: flex;
-//         align-items: center;
-//         justify-content: center;
-//     `;
-    
-//     // Генерируем HTML-содержимое
-//     modal.innerHTML = `
-//         <div style="
-//             width: 90%;
-//             max-width: 500px;
-//             max-height: 80vh;
-//             background: linear-gradient(135deg, #1e1e3a, #15152a);
-//             border-radius: 2rem;
-//             padding: 1.5rem;
-//             border: 1px solid rgba(64,224,208,0.4);
-//             overflow-y: auto;
-//         ">
-//             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-//                 <h3 style="color: white; margin: 0;">🎵 Плейлист ${escapeHtml(studentName)}</h3>
-//                 <button id="closePlaylistBtn" style="
-//                     background: rgba(64,224,208,0.2);
-//                     border: none;
-//                     color: white;
-//                     font-size: 24px;
-//                     width: 40px;
-//                     height: 40px;
-//                     border-radius: 50%;
-//                     cursor: pointer;
-//                 ">✕</button>
-//             </div>
-//             <div id="trackList">
-//                 ${tracks.map((track, index) => `
-//                     <div class="playlist-track" data-track-index="${index}" style="
-//                         display: flex;
-//                         align-items: center;
-//                         gap: 1rem;
-//                         padding: 0.75rem;
-//                         background: ${(isSamePlaylist && index === currentTrackIndexGlobal) ? 
-//                             (globalAudio && !globalAudio.paused ? 'rgba(64,224,208,0.25)' : 'rgba(64,224,208,0.2)') : 
-//                             'rgba(255,255,255,0.05)'};
-//                         border-radius: 1rem;
-//                         cursor: pointer;
-//                         margin-bottom: 0.5rem;
-//                         ${(isSamePlaylist && index === currentTrackIndexGlobal) ? 'border-left: 3px solid #40e0d0;' : ''}
-//                     ">
-//                         <div style="width: 50px; height: 50px; border-radius: 0.5rem; overflow: hidden;">
-//                             <img src="${track.cover}" style="width: 100%; height: 100%; object-fit: cover;">
-//                         </div>
-//                         <div style="flex: 1;">
-//                             <div style="color: white; font-weight: 500;">${escapeHtml(getTrackName(track.name))}</div>
-//                             <div style="color: #8b9dc3; font-size: 0.85rem;">${escapeHtml(getArtistName(track.name))}</div>
-//                         </div>
-//                         ${(isSamePlaylist && index === currentTrackIndexGlobal) ? `
-//                             <div class="playing-icon" style="width: 20px; height: 20px;">
-//                                 <svg viewBox="0 0 24 24" width="20" height="20">
-//                                     <path d="M8 5v14l11-7z" fill="#40e0d0"/>
-//                                 </svg>
-//                             </div>
-//                         ` : ''}
-//                     </div>
-//                 `).join('')}
-//             </div>
-//             <div class="other-playlist-msg" style="margin-top: 1rem; padding: 0.75rem; background: rgba(64,224,208,0.2); border-radius: 1rem; text-align: center; color: #40e0d0; font-size: 0.85rem; ${(!isSamePlaylist && globalAudio && !globalAudio.paused && currentTrackListGlobal.length) ? '' : 'display: none;'}">
-//                 🎵 Сейчас играет трек из другого плейлиста
-//             </div>
-//         </div>
-//     `;
-    
-//     document.body.appendChild(modal);  // Добавляем на страницу
-    
-//     // Обработчик закрытия по кнопке
-//     document.getElementById('closePlaylistBtn').onclick = () => {
-//         modal.remove();
-//         window.currentPlaylistTracks = null;
-//         saveFullState();
-//     };
-    
-//     // Обработчик закрытия по клику на фон
-//     modal.onclick = (e) => {
-//         if (e.target === modal) {
-//             modal.remove();
-//             window.currentPlaylistTracks = null;
-//             saveFullState();
-//         }
-//     };
-    
-//     // Обработчики клика по трекам
-//     document.querySelectorAll('.playlist-track').forEach(el => {
-//         el.onclick = (e) => {
-//             e.stopPropagation();
-//             const index = parseInt(el.getAttribute('data-track-index'));
-//             if (isNaN(index)) return;
-            
-//             if (isSamePlaylist && index === currentTrackIndexGlobal) {
-//                 // Тот же трек - пауза/плей
-//                 if (globalAudio.paused) {
-//                     globalAudio.play().catch(e => console.log(e));
-//                 } else {
-//                     globalAudio.pause();
-//                 }
-//             } else {
-//                 // Новый трек - переключаем
-//                 currentTrackListGlobal = tracks;
-//                 currentTrackIndexGlobal = index;
-//                 globalAudio.src = tracks[index].url;
-//                 globalAudio.play().catch(e => console.log(e));
-//                 updateAllPlayerDisplays();
-//                 updatePlayButtons();
-//                 updateMiniProgress();
-                
-//                 // Обновляем подсветку всех треков
-//                 document.querySelectorAll('.playlist-track').forEach((track, i) => {
-//                     const icon = track.querySelector('.playing-icon');
-//                     if (icon) icon.remove();
-//                     track.style.background = 'rgba(255,255,255,0.05)';
-//                     track.style.borderLeft = '';
-//                     track.classList.remove('active', 'playing');
-                    
-//                     if (i === index) {
-//                         track.style.background = 'rgba(64,224,208,0.25)';
-//                         track.style.borderLeft = '3px solid #40e0d0';
-//                         track.classList.add('playing');
-//                         const newIcon = document.createElement('div');
-//                         newIcon.className = 'playing-icon';
-//                         newIcon.style.cssText = 'width:20px;height:20px;margin-left:auto;';
-//                         newIcon.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#40e0d0"/></svg>';
-//                         track.appendChild(newIcon);
-//                     }
-//                 });
-                
-//                 // СКРЫВАЕМ СООБЩЕНИЕ "трек из другого плейлиста", потому что теперь трек из ЭТОГО плейлиста
-//                 const otherPlaylistMsg = modal.querySelector('.other-playlist-msg');
-//                 if (otherPlaylistMsg) {
-//                     otherPlaylistMsg.style.display = 'none';
-//                 }
-//             }
-//             saveFullState();
-//         };
-//     });
-
-//     updatePlaylistHighlight(); // Обновляем подсветку после переключения
-//     saveFullState();  // Сохраняем состояние
-// }
-
-
 
 // Открывает модальное окно с плейлистом (при клике на иконку музыки)
 function openPlaylistModal(tracks, studentName) {
