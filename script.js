@@ -625,19 +625,20 @@ function restorePlaylistModal(tracks, studentName) {
             if (isNaN(index)) return;  // Если не число - выходим
             
             if (isSamePlaylist && index === currentTrackIndexGlobal) {
-                // Если кликнули на ТЕКУЩИЙ трек - переключаем паузу/воспроизведение (НЕ перезапускаем)
+                // Если кликнули на ТЕКУЩИЙ трек - переключаем паузу/воспроизведение (НЕ перезапускаем!)
                 if (globalAudio.paused) {
-                    globalAudio.play().catch(e => console.log(e));  // Воспроизводим
+                    globalAudio.play().catch(e => console.log(e));
+                    // Меняем иконку на паузу
+                    const iconSvg = el.querySelector('.playing-icon svg');
+                    if (iconSvg) {
+                        iconSvg.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="#40e0d0"/>';
+                    }
                 } else {
-                    globalAudio.pause();  // Ставим на паузу
-                }
-                // Обновляем иконку в плейлисте
-                const iconDiv = el.querySelector('.playing-icon svg');
-                if (iconDiv) {
-                    if (globalAudio.paused) {
-                        iconDiv.innerHTML = '<path d="M8 5v14l11-7z" fill="#40e0d0"/>';
-                    } else {
-                        iconDiv.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="#40e0d0"/>';
+                    globalAudio.pause();
+                    // Меняем иконку на play
+                    const iconSvg = el.querySelector('.playing-icon svg');
+                    if (iconSvg) {
+                        iconSvg.innerHTML = '<path d="M8 5v14l11-7z" fill="#40e0d0"/>';
                     }
                 }
             } else {
@@ -750,15 +751,20 @@ function handleAudioEnded() {
 // Обновляет информацию в мини-плеере (обложка, название, исполнитель)
 function updateAllPlayerDisplays() {
     if (!currentTrackListGlobal.length || currentTrackIndexGlobal >= currentTrackListGlobal.length) return;
-    const track = currentTrackListGlobal[currentTrackIndexGlobal];  // Текущий трек
+    const track = currentTrackListGlobal[currentTrackIndexGlobal];
     
     const miniCover = document.getElementById('miniPlayerCover');
     const miniTitle = document.getElementById('miniPlayerTitle');
     const miniArtist = document.getElementById('miniPlayerArtist');
     
-    if (miniCover) miniCover.src = track.cover;                     // Устанавливаем обложку
-    if (miniTitle) miniTitle.textContent = getTrackName(track.name); // Устанавливаем название
-    if (miniArtist) miniArtist.textContent = getArtistName(track.name); // Устанавливаем исполнителя
+    if (miniCover) miniCover.src = track.cover;
+    if (miniTitle) miniTitle.textContent = getTrackName(track.name);
+    if (miniArtist) miniArtist.textContent = getArtistName(track.name);
+    
+    // Перезапускаем проверку бегущей строки
+    setTimeout(() => {
+        checkMarquee();
+    }, 100);
 }
 
 
@@ -893,9 +899,8 @@ function switchTrack(newIndex, keepPlaying) {
 // Создаёт HTML-элемент мини-плеера и добавляет его на страницу
 function createMiniPlayerElement() {
     const miniPlayer = document.createElement('div');
-    miniPlayer.className = 'mini-player';  // CSS-класс для стилизации
+    miniPlayer.className = 'mini-player';
     
-    // HTML-структура мини-плеера с новым расположением
     miniPlayer.innerHTML = `
         <div class="mini-player-left">
             <div class="mini-player-cover">
@@ -922,21 +927,48 @@ function createMiniPlayerElement() {
         
         <div class="mini-player-right">
             <button class="mini-player-btn" id="miniPlayerPrev">
-                <svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" fill="#cbd5e1"/></svg>
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                    <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" fill="white"/>
+                </svg>
             </button>
             <button class="mini-player-btn mini-player-play" id="miniPlayerPlay">
-                <svg viewBox="0 0 24 24" width="32" height="32"><path d="M8 5v14l11-7z" fill="#40e0d0"/></svg>
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M8 5v14l11-7z" fill="#40e0d0"/>
+                </svg>
             </button>
             <button class="mini-player-btn" id="miniPlayerNext">
-                <svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" fill="#cbd5e1"/></svg>
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                    <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" fill="white"/>
+                </svg>
             </button>
             <button class="mini-player-close" id="miniPlayerClose">✕</button>
         </div>
     `;
     
-    document.body.appendChild(miniPlayer);  // Добавляем в DOM
-    attachMiniPlayerEvents();               // Навешиваем обработчики
+    document.body.appendChild(miniPlayer);
+    attachMiniPlayerEvents();
     return miniPlayer;
+}
+
+// Функция для проверки и запуска бегущей строки
+function checkMarquee() {
+    const titles = document.querySelectorAll('.mini-player-title, .mini-player-artist');
+    titles.forEach(el => {
+        const parent = el.parentElement;
+        if (parent) {
+            const parentWidth = parent.clientWidth;
+            const textWidth = el.scrollWidth;
+            
+            if (textWidth > parentWidth) {
+                el.classList.add('marquee-animate');
+                // Скорость анимации зависит от длины текста
+                const duration = Math.max(3, textWidth / 50);
+                el.style.animationDuration = `${duration}s`;
+            } else {
+                el.classList.remove('marquee-animate');
+            }
+        }
+    });
 }
 
 // Навешивает обработчики событий на элементы мини-плеера
@@ -1181,13 +1213,13 @@ function ensureMiniPlayerVisible() {
 window.currentPlaylistTracks = null;  // Глобальная переменная для хранения текущего открытого плейлиста
 
 // Открывает модальное окно с плейлистом (при клике на иконку музыки)
+// Открывает модальное окно с плейлистом (при клике на иконку музыки)
 function openPlaylistModal(tracks, studentName) {
-    if (!tracks || tracks.length === 0) return;  // Нет треков - выходим
+    if (!tracks || tracks.length === 0) return;
     
-    window.currentPlaylistTracks = tracks;  // Запоминаем открытый плейлист
-    const isSamePlaylist = arePlaylistsEqual(currentTrackListGlobal, tracks);  // Тот же ли плейлист?
+    window.currentPlaylistTracks = tracks;
+    const isSamePlaylist = arePlaylistsEqual(currentTrackListGlobal, tracks);
     
-    // Создаём модальное окно
     const modal = document.createElement('div');
     modal.className = 'playlist-modal';
     modal.style.cssText = `
@@ -1204,7 +1236,6 @@ function openPlaylistModal(tracks, studentName) {
         justify-content: center;
     `;
     
-    // Генерируем HTML-содержимое
     modal.innerHTML = `
         <div style="
             width: 90%;
@@ -1231,7 +1262,7 @@ function openPlaylistModal(tracks, studentName) {
             </div>
             <div id="trackList">
                 ${tracks.map((track, index) => `
-                    <div class="playlist-track" data-track-index="${index}" style="
+                    <div class="playlist-track" data-track-index="${index}" data-track-url="${track.url}" style="
                         display: flex;
                         align-items: center;
                         gap: 1rem;
@@ -1270,16 +1301,14 @@ function openPlaylistModal(tracks, studentName) {
         </div>
     `;
     
-    document.body.appendChild(modal);  // Добавляем на страницу
+    document.body.appendChild(modal);
     
-    // Обработчик закрытия по кнопке
     document.getElementById('closePlaylistBtn').onclick = () => {
         modal.remove();
         window.currentPlaylistTracks = null;
         saveFullState();
     };
     
-    // Обработчик закрытия по клику на фон
     modal.onclick = (e) => {
         if (e.target === modal) {
             modal.remove();
@@ -1288,43 +1317,64 @@ function openPlaylistModal(tracks, studentName) {
         }
     };
     
-    // Обработчики клика по трекам
     document.querySelectorAll('.playlist-track').forEach(el => {
         el.onclick = (e) => {
             e.stopPropagation();
             const index = parseInt(el.getAttribute('data-track-index'));
+            const trackUrl = el.getAttribute('data-track-url');
             if (isNaN(index)) return;
             
-            if (isSamePlaylist && index === currentTrackIndexGlobal) {
-                // Тот же трек - переключаем паузу/плей (НЕ перезапускаем)
+            console.log('Клик по треку:', index, 'текущий индекс:', currentTrackIndexGlobal);
+            console.log('globalAudio.src:', globalAudio?.src);
+            console.log('trackUrl:', trackUrl);
+            console.log('globalAudio.paused:', globalAudio?.paused);
+            
+            // Проверяем, тот же ли это трек (сравниваем URL)
+            const isSameTrack = globalAudio && globalAudio.src.includes(trackUrl);
+            
+            if (isSameTrack) {
+                // Тот же трек - просто пауза/плей
                 if (globalAudio.paused) {
+                    console.log('На паузе - запускаем');
                     globalAudio.play().catch(e => console.log(e));
-                } else {
-                    globalAudio.pause();
-                }
-                // Обновляем иконку в плейлисте
-                const iconDiv = el.querySelector('.playing-icon svg');
-                if (iconDiv) {
-                    if (globalAudio.paused) {
-                        iconDiv.innerHTML = '<path d="M8 5v14l11-7z" fill="#40e0d0"/>';
-                    } else {
-                        iconDiv.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="#40e0d0"/>';
+                    // Меняем иконку на паузу
+                    const iconSvg = el.querySelector('.playing-icon svg');
+                    if (iconSvg) {
+                        iconSvg.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="#40e0d0"/>';
                     }
+                    el.style.background = 'rgba(64,224,208,0.25)';
+                } else {
+                    console.log('Играет - ставим на паузу');
+                    globalAudio.pause();
+                    // Меняем иконку на play
+                    const iconSvg = el.querySelector('.playing-icon svg');
+                    if (iconSvg) {
+                        iconSvg.innerHTML = '<path d="M8 5v14l11-7z" fill="#40e0d0"/>';
+                    }
+                    el.style.background = 'rgba(64,224,208,0.2)';
                 }
             } else {
-                // Новый трек - переключаем
+                // Новый трек
                 currentTrackListGlobal = tracks;
                 currentTrackIndexGlobal = index;
+                
+                // Сохраняем, нужно ли играть
+                const shouldPlay = globalAudio && !globalAudio.paused;
+                
                 globalAudio.src = tracks[index].url;
-                globalAudio.play().catch(e => console.log(e));
+                
+                if (shouldPlay) {
+                    globalAudio.play().catch(e => console.log(e));
+                }
+                
                 updateAllPlayerDisplays();
                 updatePlayButtons();
                 updateMiniProgress();
                 
-                // Обновляем подсветку всех треков
+                // Обновляем все треки в плейлисте
                 document.querySelectorAll('.playlist-track').forEach((track, i) => {
-                    const icon = track.querySelector('.playing-icon');
-                    if (icon) icon.remove();
+                    const existingIcon = track.querySelector('.playing-icon');
+                    if (existingIcon) existingIcon.remove();
                     track.style.background = 'rgba(255,255,255,0.05)';
                     track.style.borderLeft = '';
                     track.classList.remove('active', 'playing');
@@ -1341,7 +1391,6 @@ function openPlaylistModal(tracks, studentName) {
                     }
                 });
                 
-                // СКРЫВАЕМ СООБЩЕНИЕ "трек из другого плейлиста", потому что теперь трек из ЭТОГО плейлиста
                 const otherPlaylistMsg = modal.querySelector('.other-playlist-msg');
                 if (otherPlaylistMsg) {
                     otherPlaylistMsg.style.display = 'none';
@@ -1351,13 +1400,9 @@ function openPlaylistModal(tracks, studentName) {
         };
     });
 
-    updatePlaylistHighlight(); // Обновляем подсветку после переключения
-    saveFullState();  // Сохраняем состояние
+    updatePlaylistHighlight();
+    saveFullState();
 }
-
-
-
-
 
 // ============================================================================
 // МЕДИА-ПРОСМОТРЩИК (ФОТО И ВИДЕО)
@@ -1708,7 +1753,9 @@ function renderStudentPage() {
                 </div>
                 <div class="student-info">
                     <h2>${student.name}</h2>
-                    <div class="contacts">${student.contacts || ''}</div>
+                    <div class="contacts" style="display: flex; overflow-x: auto; white-space: nowrap; gap: 8px; -webkit-overflow-scrolling: touch;">
+                        ${student.contacts || ''}
+                    </div>
                 </div>
             </div>
             
